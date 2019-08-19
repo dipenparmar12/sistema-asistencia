@@ -2,9 +2,11 @@
 	"name": "typescirpt_nodejs",
 	"version": "1.0.0",
 	"description": "TypeScript Nodejs Express Application for Practice ",
-	"main": "index.js",
+	"main": "src/server.ts",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon src/server.ts",
+		"build": "tsc -p ."
 	},
 	"keywords": [
 		"nodejs",
@@ -22,6 +24,8 @@
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
 		"class-validator": "^0.10.0",
+		"dotenv": "^8.1.0",
+		"express": "^4.17.1",
 		"helmet": "^3.20.0",
 		"jsonwebtoken": "^8.5.1",
 		"mysql2": "^1.6.5",
@@ -29,5 +33,8 @@
 		"ts-node-dev": "^1.0.0-pre.41",
 		"typeorm": "^0.2.18",
 		"typescript": "^3.5.3"
+	},
+	"devDependencies": {
+		"nodemon": "^1.19.1"
 	}
 }
