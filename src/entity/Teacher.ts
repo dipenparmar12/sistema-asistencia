@@ -31,10 +31,6 @@ export default class Teacher {
 	id: number;
 
 	@Column()
-	@Generated('uuid')
-	uuid: string;
-
-	@Column()
 	@VersionColumn()
 	version: number;
 
