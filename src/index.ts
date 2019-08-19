@@ -5,42 +5,48 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
 import { TeacherRoutes } from './routes/TeacherRoutes';
-import * as https from 'https';
 import * as path from 'path';
 
 // initialize configuration
 dotenv.config();
 
-class App {
-	public app: express.Application = express();
+class MyApplication {
+	public _express: express.Application = express();
+	public port: number = parseInt(process.env.PORT);
 	public teacherRoutes: TeacherRoutes = new TeacherRoutes();
 
 	constructor() {
 		this.appConfig();
 		this.appRoutes();
 		// const connection = getConnection();
-		this.app.listen(process.env.PORT, () => {
-			console.log('Started:server.js At:' + process.env.PORT);
+		this._express.listen(this.port, () => {
+			console.log(process.env.APP_NAME + ': Started:server.js At:' + this.port);
 		});
 	}
 
+	/**
+	 * Express Midallwares & other configration ( Cookies, static path ..etc )
+	 */
 	private appConfig(): void {
-		this.app.use(bodyParser.json());
-		this.app.use(bodyParser.urlencoded({ extended: false }));
+		this._express.use(bodyParser.json());
+		this._express.use(bodyParser.urlencoded({ extended: false }));
 
 		// serving static files
-		this.app.use(express.static('public'));
+		this._express.use(express.static('public'));
 
 		//// Public Dir
-		this.app.use('/', express.static(path.join(__dirname, '../public')));
+		this._express.use('/', express.static(path.join(__dirname, '../public')));
 	}
 
+	/**
+	 * Set All Application Routes from External Class's
+	 */
 	private appRoutes(): void {
-		this.teacherRoutes.routes(this.app);
+		this.teacherRoutes.routes(this._express);
 	}
 }
 
-export const app: App = new App();
+new MyApplication();
 
 // https.createServer(new App().app).listen(8000, () => {
 // 	console.log('APp Started');
