@@ -5,8 +5,12 @@
 	"main": "src/server.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "nodemon src/server.ts",
-		"build": "tsc -p ."
+		"devs": "nodemon src/server.ts",
+		"devi": "nodemon src/index.ts",
+		"build": "tsc -p .",
+		"dev": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+		"prod": "tsc && node ./build/app.js",
+		"migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
 	},
 	"keywords": [
 		"nodejs",
@@ -19,6 +23,7 @@
 	"dependencies": {
 		"@types/bcryptjs": "^2.4.2",
 		"@types/body-parser": "^1.17.1",
+		"@types/dotenv": "^6.1.1",
 		"@types/helmet": "0.0.43",
 		"@types/jsonwebtoken": "^8.3.3",
 		"bcryptjs": "^2.4.3",

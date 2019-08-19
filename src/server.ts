@@ -1,39 +1,10 @@
-import 'reflect-metadata';
-import { createConnection } from 'typeorm';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as helmet from 'helmet';
-// import routes from './routes';
-import { Request, Response } from 'express';
+import { createConnections, Connection } from 'typeorm';
 
-require('dotenv').config();
-
-//Connects to the Database -> then starts the express
-createConnection({
-	name: 'default',
-	type: 'mysql',
-	host: 'localhost',
-	username: 'test',
-	password: '',
-	database: 'test',
-})
-	.then(async connection => {
-		// Create a new express application instance
-		const app = express();
-
-		// Call midlewares
-		app.use(helmet());
-		app.use(bodyParser.json());
-
-		app.listen(process.env.PORT, () => {
-			console.log('Server started on port ' + process.env.PORT);
-		});
-
-		//Set all routes from routes folder
-		// app.use('/', routes);
-
-		app.get('', (req: Request, res: Response) => {
-			res.send('hhelo');
-		});
-	})
-	.catch(error => console.log(error));
+export class Conn {
+	private DBNAME = process.env.DBNAME;
+	private DBUSER = process.env.DBUSER;
+	private DBPASSWORD = process.env.DBPASSWORD;
+	private DBMS_TYPE = process.env.DBMS_TYPE;
+	private host = process.env.host;
+	constructor() {}
+}
