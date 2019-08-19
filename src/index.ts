@@ -4,21 +4,49 @@ import { createConnection, Connection, getConnection } from 'typeorm';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
-import { Request, Response } from 'express';
-import { Conn } from './server';
+import { TeacherRoutes } from './routes/TeacherRoutes';
+import * as https from 'https';
+import * as path from 'path';
 
 // initialize configuration
 dotenv.config();
 
 class App {
 	public app: express.Application = express();
+	public teacherRoutes: TeacherRoutes = new TeacherRoutes();
 
 	constructor() {
-		const connection = getConnection();
+		this.appConfig();
+		this.appRoutes();
+		// const connection = getConnection();
+		this.app.listen(process.env.PORT, () => {
+			console.log('Started:server.js At:' + process.env.PORT);
+		});
+	}
+
+	private appConfig(): void {
+		this.app.use(bodyParser.json());
+		this.app.use(bodyParser.urlencoded({ extended: false }));
+
+		// serving static files
+		this.app.use(express.static('public'));
+
+		//// Public Dir
+		this.app.use('/', express.static(path.join(__dirname, '../public')));
+	}
+
+	private appRoutes(): void {
+		this.teacherRoutes.routes(this.app);
 	}
 }
 
-export default new App().app;
+export const app: App = new App();
+
+// https.createServer(new App().app).listen(8000, () => {
+// 	console.log('APp Started');
+// });
+
+// export default new App().app;
 
 // //Connects to the Da  tabase -> then starts the express
 // createConnection({
