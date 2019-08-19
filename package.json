@@ -1,0 +1,17 @@
+{
+  "name": "typescirpt_nodejs",
+  "version": "1.0.0",
+  "description": "TypeScript Nodejs Express Application for Practice ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "typescirpt",
+    "typeorm"
+  ],
+  "author": "dipen parmar",
+  "license": "ISC"
+}
