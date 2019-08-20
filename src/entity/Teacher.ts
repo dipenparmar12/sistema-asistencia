@@ -1,3 +1,4 @@
+import { EntityRepository } from 'typeorm';
 import {
 	Column,
 	Entity,
@@ -24,6 +25,7 @@ import {
 // 	, is_logged: { type: DataTypes.TEXT, allowNull: true }
 //   });
 
+@EntityRepository()
 @Entity()
 @Unique(['username'])
 export default class Teacher {

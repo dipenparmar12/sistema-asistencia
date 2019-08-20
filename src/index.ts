@@ -15,11 +15,12 @@ class MyApplication {
 	public _express: express.Application = express();
 	public port: number = parseInt(process.env.PORT);
 	public teacherRoutes: TeacherRoutes = new TeacherRoutes();
-
+	public db = Connection;
 	constructor() {
 		this.appConfig();
 		this.appRoutes();
 		// const connection = getConnection();
+		this.conn();
 		this._express.listen(this.port, () => {
 			console.log(process.env.APP_NAME + ', Started At:' + this.port);
 		});
@@ -44,6 +45,26 @@ class MyApplication {
 	 */
 	private appRoutes(): void {
 		this.teacherRoutes.routes(this._express);
+	}
+
+	public test(): string {
+		return ' testString(): ';
+	}
+
+	public async conn() {
+		this.db = await createConnection({
+			type: 'mysql',
+			host: 'localhost',
+			username: 'root',
+			password: '',
+			database: 'test',
+			entities: [Teacher],
+			synchronize: true,
+		});
+
+		// const tRepo = getRepository(Teacher);
+		// const teachers = await tRepo.find();
+		// console.log(teachers);
 	}
 }
 
@@ -72,8 +93,8 @@ export default new MyApplication()._express;
 
 // 		app.get('', async (req, res) => {
 // 			const teacherRepository = getRepository(Teacher);
-// 			const teachers = await teacherRepository.find();
-// 			console.log(teachers);
+// const teachers = await teacherRepository.find();
+// console.log(teachers);
 
 // 			//Send the teachers object
 // 			let n = new Teacher();
