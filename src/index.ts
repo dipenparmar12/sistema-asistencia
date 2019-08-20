@@ -1,20 +1,18 @@
 import 'reflect-metadata';
+import * as path from 'path';
 import * as dotenv from 'dotenv';
-import { createConnection, Connection, getConnection, getRepository } from 'typeorm';
+import * as helmet from 'helmet';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as helmet from 'helmet';
-import { TeacherRoutes } from './routes/TeacherRoutes';
-import * as path from 'path';
+import { createConnection, Connection } from 'typeorm';
+import appRoutes from './routes/indexRoutes';
 import Teacher from './entity/Teacher';
 
-// initialize configuration
 dotenv.config();
 
 class MyApplication {
 	public _express: express.Application = express();
 	public port: number = parseInt(process.env.PORT);
-	public teacherRoutes: TeacherRoutes = new TeacherRoutes();
 	db: Connection;
 
 	constructor() {
@@ -30,13 +28,10 @@ class MyApplication {
 	 * Express Midallwares & other configration ( Cookies, static path ..etc )
 	 */
 	private appConfig(): void {
+		this._express.use(helmet());
 		this._express.use(bodyParser.json());
 		this._express.use(bodyParser.urlencoded({ extended: false }));
-
-		// serving static files
 		this._express.use(express.static('public'));
-
-		//// Public Dir
 		this._express.use('/', express.static(path.join(__dirname, '../public')));
 	}
 
@@ -44,13 +39,16 @@ class MyApplication {
 	 * Set All Application Routes from External Class's
 	 */
 	private appRoutes(): void {
-		this.teacherRoutes.routes(this._express);
+		this._express.use(appRoutes);
 	}
 
 	public test(): string {
 		return ' testString(): ';
 	}
 
+	/**
+	 * Database Connection and Configration
+	 */
 	public async conn() {
 		this.db = await createConnection({
 			type: 'mysql',
@@ -68,43 +66,4 @@ class MyApplication {
 	}
 }
 
-export default new MyApplication()._express;
-
-//
-//
-//
-
-//Connects to the Da  tabase -> then starts the express
-// createConnection()
-// 	.then(async connection => {
-// 		// Create a new express application instance
-// 		const app = express();
-
-// 		// Call midlewares
-// 		app.use(helmet());
-// 		app.use(bodyParser.json());
-
-// 		app.listen(process.env.PORT, () => {
-// 			console.log('Server started on port ' + process.env.PORT);
-// 		});
-
-// 		//Set all routes from routes folder
-// 		// app.use('/', routes);
-
-// 		app.get('', async (req, res) => {
-// 			const teacherRepository = getRepository(Teacher);
-// const teachers = await teacherRepository.find();
-// console.log(teachers);
-
-// 			//Send the teachers object
-// 			let n = new Teacher();
-// 			n.name = 'dk';
-// 			n.password = 'name';
-// 			n.username = 'name';
-// 			n.subject = 'php';
-
-// 			teacherRepository.save(n);
-// 			res.send(teachers);
-// 		});
-// 	})
-// 	.catch(error => console.log(error));
+export default new MyApplication();
