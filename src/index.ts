@@ -15,11 +15,11 @@ class MyApplication {
 	public _express: express.Application = express();
 	public port: number = parseInt(process.env.PORT);
 	public teacherRoutes: TeacherRoutes = new TeacherRoutes();
-	public db = Connection;
+	db: Connection;
+
 	constructor() {
 		this.appConfig();
 		this.appRoutes();
-		// const connection = getConnection();
 		this.conn();
 		this._express.listen(this.port, () => {
 			console.log(process.env.APP_NAME + ', Started At:' + this.port);
@@ -54,10 +54,10 @@ class MyApplication {
 	public async conn() {
 		this.db = await createConnection({
 			type: 'mysql',
-			host: 'localhost',
-			username: 'root',
-			password: '',
-			database: 'test',
+			host: process.env.DB_HOST,
+			username: process.env.DB_USER,
+			password: process.env.DB_PASS,
+			database: process.env.DB_NAME,
 			entities: [Teacher],
 			synchronize: true,
 		});

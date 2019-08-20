@@ -7,7 +7,7 @@ export class TeacherRoutes {
 		app.route('/').get(async (req: Request, res: Response) => {
 			const tRepo = getRepository(Teacher);
 			const teachers = await tRepo.find();
-			console.log(teachers);
+			// console.log(teachers);
 			res.send(teachers);
 		});
 	}
