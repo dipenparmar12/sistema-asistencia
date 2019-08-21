@@ -1,12 +1,22 @@
 import { Request, Response, Router } from 'express'
-import teacherController from './../controllers/teacherController'
+import controller from './../controllers/teacherController'
+import authController from './../controllers/authController'
 
 let router = Router()
 
-// router.get('/', teacherController.test)
-router.get('/', async (req: Request, res: Response) => {
-	res.send(teacherController.crud())
-})
+router.post('/login')
+
+router
+	.get('/', controller.getAll)
+
+	.post('/', controller.create)
+	.get('/:id', controller.getOneById)
+	.patch('/:id', controller.update)
+	.delete('/:id', controller.destroy)
+
+// router.post('/login', async (req: Request, res: Response) => {
+// 	res.send(req.body)
+// })
 
 // router.get('/', async (req: Request, res: Response) => {
 // 	res.send(await CrudController.get(Teacher))

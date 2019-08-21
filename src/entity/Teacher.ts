@@ -77,6 +77,6 @@ export default class Teacher {
 	updatedAt: Date
 
 	hashPassword() {
-		// this.password = bcrypt.hashSync(this.password, 8);
+		this.password = bcrypt.hashSync(this.password, 10)
 	}
 }

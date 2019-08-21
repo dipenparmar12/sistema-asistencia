@@ -5,25 +5,16 @@ import { Request, Response } from 'express-serve-static-core'
 export class CrudController {
 	public _data: String = 'This is CrudController'
 
-	constructor(data?) {
-		this._data = data
-	}
-
 	get data() {
 		return this._data
 	}
 
-	crud() {
-		console.log(`Hello, i am from crud: seted ${this.data}`)
-		return 'crud()'
+	async test(req: Request, res: Response) {
+		console.log(this)
+		await res.send('CRUD Parent this' + this.data)
 	}
 
-	async testparent(req: Request, res: Response) {
-		console.log()
-		await res.send('CRUD Parent this')
-	}
-
-	async get() {
+	async getCrud() {
 		const repository = getRepository(Teacher)
 		return await repository.find()
 	}

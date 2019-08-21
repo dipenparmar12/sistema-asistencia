@@ -13,5 +13,8 @@ appRoutes.get('/', (req: Request, res: Response) => {
 appRoutes.get('/login', (req: Request, res: Response) => {
 	res.render('teacher_login')
 })
+appRoutes.get('/registration', (req: Request, res: Response) => {
+	res.render('teacher_registration')
+})
 
 export default appRoutes
