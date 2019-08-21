@@ -13,7 +13,7 @@ class TeacherController extends CrudController {
 	getAll = async (req: Request, res: Response) => {
 		//Get data from database
 		const databaseRepository = getRepository(Teacher)
-		const selectAttributes: any = { select: ['id', 'name', 'username', 'is_logged'] }
+		const selectAttributes: any = { select: ['id', 'name', 'username', 'roll'] }
 		const data = await databaseRepository.find(selectAttributes)
 
 		//Send the data object
@@ -62,7 +62,7 @@ class TeacherController extends CrudController {
 		try {
 			await databaseRepository.save(data)
 		} catch (e) {
-			res.status(409).send('teachername already in use')
+			res.status(200).json({ status: 'fail', message: e.message, error: e, data: false })
 			return
 		}
 
@@ -73,13 +73,10 @@ class TeacherController extends CrudController {
 	update = async (req: Request, res: Response) => {
 		//Get the ID from the url
 		const id = req.params.id
-
-		//Get values from the body
-		const { teachername, role } = req.body
+		let data = new Teacher()
 
 		//Try to find data on database
 		const databaseRepository = getRepository(Teacher)
-		let data
 		try {
 			data = await databaseRepository.findOneOrFail(id)
 		} catch (error) {
@@ -89,8 +86,15 @@ class TeacherController extends CrudController {
 		}
 
 		//Validate the new values on model
-		data.teachername = teachername
-		data.role = role
+		let { username, password, name, email, subject, roll } = req.body
+
+		data.username = username
+		data.password = password
+		data.name = name
+		data.email = email
+		data.subject = subject
+		data.roll = roll
+
 		const errors = await validate(data)
 		if (errors.length > 0) {
 			res.status(400).send(errors)

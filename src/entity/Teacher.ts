@@ -8,7 +8,7 @@ import {
 	VersionColumn,
 	Unique,
 } from 'typeorm'
-
+import * as bcrypt from 'bcryptjs'
 // const Teachers = attendance_db.define('teachers', {
 // 	id: { allowNull: false, primaryKey: true, type: Sequelize.UUID, defaultValue: uuidv4() }
 // 	, username: { type: DataTypes.STRING, unique: true, allowNull: false }
@@ -77,6 +77,9 @@ export default class Teacher {
 	updatedAt: Date
 
 	hashPassword() {
-		this.password = bcrypt.hashSync(this.password, 10)
+		this.password = bcrypt.hashSync(this.password + '', 12)
+	}
+	unencrypted_password_is_valid(unencryptedPassword: string) {
+		return bcrypt.compareSync(unencryptedPassword, this.password + '')
 	}
 }
