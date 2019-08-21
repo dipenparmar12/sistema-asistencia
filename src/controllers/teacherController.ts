@@ -1,14 +1,15 @@
 import { Request, Response } from 'express'
+import { CrudController } from './crudController'
+import Teacher from '../entity/Teacher'
 
-export class TeacherController {
-	public get() {}
+class TeacherController extends CrudController {
+	constructor() {
+		super('Teacher | Crud')
+	}
 
-	public getContacts(req: Request, res: Response) {
-		Contact.find({}, (err, contact) => {
-			if (err) {
-				res.send(err)
-			}
-			res.json(contact)
-		})
+	async test(req: Request, res: Response) {
+		await res.send('TEACHER')
 	}
 }
+
+export default new TeacherController()

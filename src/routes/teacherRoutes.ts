@@ -1,12 +1,16 @@
 import { Request, Response, Router } from 'express'
-import { getRepository } from 'typeorm'
-import Teacher from '../entity/Teacher'
-import CrudController from '../controllers/crudController'
+import teacherController from './../controllers/teacherController'
+
 let router = Router()
 
+// router.get('/', teacherController.test)
 router.get('/', async (req: Request, res: Response) => {
-	res.send(await CrudController.get(Teacher))
+	res.send(teacherController.crud())
 })
+
+// router.get('/', async (req: Request, res: Response) => {
+// 	res.send(await CrudController.get(Teacher))
+// })
 
 // router
 // 	.get('/', async (req: Request, res: Response) => {

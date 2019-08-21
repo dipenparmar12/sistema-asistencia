@@ -30,13 +30,13 @@ class MyApplication {
 	 */
 	private appMiddlewares(): void {
 		this._express.use(helmet())
-		this._express.use(bodyParser.json())
-		this._express.use(bodyParser.urlencoded({ extended: false }))
-		this._express.use(cookieParser())
-		this._express.use(express.static('public'))
-		this._express.use('/', express.static(path.join(__dirname, '../public')))
-		this._express.set('views', path.join(__dirname, 'views'))
-		this._express.set('view engine', 'pug')
+		// this._express.use(bodyParser.json())
+		// this._express.use(bodyParser.urlencoded({ extended: false }))
+		// this._express.use(cookieParser())
+		// this._express.use(express.static('public'))
+		// this._express.use('/', express.static(path.join(__dirname, '../public')))
+		// this._express.set('views', path.join(__dirname, 'views'))
+		// this._express.set('view engine', 'pug')
 	}
 
 	/**
