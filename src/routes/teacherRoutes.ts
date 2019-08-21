@@ -4,14 +4,16 @@ import authController from './../controllers/authController'
 import { checkJwt } from '../middlewares/checkJwt'
 
 let router = Router()
-router.post('/login', authController.login)
+
 router
 	.get('/', controller.getAll)
 
-	.post('/', checkJwt, controller.create)
-	.get('/:id', checkJwt, controller.getOneById)
-	.patch('/:id', checkJwt, controller.update)
-	.delete('/:id', checkJwt, controller.destroy)
+	.post('/', controller.create)
+	.get('/:id', controller.getOneById)
+	.patch('/:id', controller.update)
+	.delete('/:id', controller.destroy)
+
+router.post('/login', authController.login)
 
 // router.post('/login', async (req: Request, res: Response) => {
 // 	res.send(req.body)

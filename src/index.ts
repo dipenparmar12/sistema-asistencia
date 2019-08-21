@@ -7,7 +7,10 @@ import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 import { createConnection, Connection } from 'typeorm'
 import appRoutes from './routes/indexRoutes'
+import Student from './entity/Student'
+import Attendance from './entity/Attendance'
 import Teacher from './entity/Teacher'
+// import teacherRoutes from './routes/teacherRoutes'
 
 dotenv.config()
 
@@ -44,6 +47,7 @@ class MyApplication {
 	 */
 	private appRoutes(): void {
 		this._express.use(appRoutes)
+		// this._express.use('/api/teachers', teacherRoutes)
 		this.errorRoutes()
 	}
 
@@ -71,7 +75,7 @@ class MyApplication {
 			username: process.env.DB_USER,
 			password: process.env.DB_PASS,
 			database: process.env.DB_NAME,
-			entities: [Teacher],
+			entities: [Teacher, Student, Attendance],
 			synchronize: true,
 		})
 

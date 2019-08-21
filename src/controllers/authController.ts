@@ -51,6 +51,8 @@ class AuthController {
 
 		//Send the jwt in the response
 		res.send(teacher)
+
+		// res.redirect(200, '/')
 	}
 }
 
