@@ -1,15 +1,19 @@
-import { Request, Response, Router } from 'express';
-let router = Router();
+import { Request, Response, Router } from 'express'
+import TeacherRepository from '../repos/teacherRepository'
+import { getRepository } from 'typeorm'
+import Teacher from '../entity/Teacher'
+let router = Router()
 
 router
-	.get('/', (req: Request, res: Response) => {
-		res.send('Teacher Router');
+	.get('/', async (req: Request, res: Response) => {
+		const teacherRepository = getRepository(Teacher)
+		res.send(await teacherRepository.find())
 	})
 	.get('/:id', (req: Request, res: Response) => {
-		res.send('Teacher ID: ' + req.params.id);
-	});
+		res.send('Teacher ID: ' + req.params.id)
+	})
 
-export default router;
+export default router
 
 // class TeacherRoutes {
 // 	public routes(app): void {

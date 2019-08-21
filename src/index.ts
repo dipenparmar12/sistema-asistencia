@@ -1,49 +1,64 @@
-import 'reflect-metadata';
-import * as path from 'path';
-import * as dotenv from 'dotenv';
-import * as helmet from 'helmet';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import { createConnection, Connection } from 'typeorm';
-import appRoutes from './routes/indexRoutes';
-import Teacher from './entity/Teacher';
+import 'reflect-metadata'
+import * as path from 'path'
+import * as dotenv from 'dotenv'
+import * as helmet from 'helmet'
+import * as express from 'express'
+import * as bodyParser from 'body-parser'
+import * as cookieParser from 'cookie-parser'
+import { createConnection, Connection } from 'typeorm'
+import appRoutes from './routes/indexRoutes'
+import Teacher from './entity/Teacher'
 
-dotenv.config();
+dotenv.config()
 
 class MyApplication {
-	public _express: express.Application = express();
-	public port: number = parseInt(process.env.PORT);
-	db: Connection;
+	public _express: express.Application = express()
+	public port: number = parseInt(process.env.PORT)
+	db: Connection
 
 	constructor() {
-		this.appConfig();
-		this.appRoutes();
-		this.conn();
+		this.appMiddlewares()
+		this.appRoutes()
+		this.conn()
 		this._express.listen(this.port, () => {
-			console.log(process.env.APP_NAME + ', Started At:' + this.port);
-		});
+			console.log(process.env.APP_NAME + ', Started At:' + this.port)
+		})
 	}
 
 	/**
 	 * Express Midallwares & other configration ( Cookies, static path ..etc )
 	 */
-	private appConfig(): void {
-		this._express.use(helmet());
-		this._express.use(bodyParser.json());
-		this._express.use(bodyParser.urlencoded({ extended: false }));
-		this._express.use(express.static('public'));
-		this._express.use('/', express.static(path.join(__dirname, '../public')));
+	private appMiddlewares(): void {
+		this._express.use(helmet())
+		this._express.use(bodyParser.json())
+		this._express.use(bodyParser.urlencoded({ extended: false }))
+		this._express.use(cookieParser())
+		this._express.use(express.static('public'))
+		this._express.use('/', express.static(path.join(__dirname, '../public')))
+		this._express.set('views', path.join(__dirname, 'views'))
+		this._express.set('view engine', 'pug')
 	}
 
 	/**
 	 * Set All Application Routes from External Class's
 	 */
 	private appRoutes(): void {
-		this._express.use(appRoutes);
+		this._express.use(appRoutes)
+		this.errorRoutes()
+	}
+
+	private errorRoutes() {
+		////.... IF Request Route not Found.. THRO ERROR
+		this._express.use((req, res, next) => {
+			res.status(404).render('errors/404.pug', { url: req.url })
+		})
+		this._express.use((err, req, res, next) => {
+			res.status(500).send(err.stack)
+		})
 	}
 
 	public test(): string {
-		return ' testString(): ';
+		return ' testString(): '
 	}
 
 	/**
@@ -58,7 +73,7 @@ class MyApplication {
 			database: process.env.DB_NAME,
 			entities: [Teacher],
 			synchronize: true,
-		});
+		})
 
 		// const tRepo = getRepository(Teacher);
 		// const teachers = await tRepo.find();
@@ -66,4 +81,4 @@ class MyApplication {
 	}
 }
 
-export default new MyApplication();
+export default new MyApplication()

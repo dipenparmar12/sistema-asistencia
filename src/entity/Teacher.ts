@@ -1,14 +1,13 @@
-import { EntityRepository } from 'typeorm';
+import { EntityRepository } from 'typeorm'
 import {
 	Column,
 	Entity,
 	PrimaryGeneratedColumn,
 	CreateDateColumn,
-	Generated,
 	UpdateDateColumn,
 	VersionColumn,
 	Unique,
-} from 'typeorm';
+} from 'typeorm'
 
 // const Teachers = attendance_db.define('teachers', {
 // 	id: { allowNull: false, primaryKey: true, type: Sequelize.UUID, defaultValue: uuidv4() }
@@ -30,52 +29,52 @@ import {
 @Unique(['username'])
 export default class Teacher {
 	@PrimaryGeneratedColumn('uuid')
-	id: number;
+	id: number
 
 	@Column()
 	@VersionColumn()
-	version: number;
+	version: number
 
 	@Column({ type: 'varchar', length: 100 })
-	username: String;
+	username: String
 
 	@Column()
-	password: String;
+	password: String
 
 	@Column()
-	name: String;
+	name: String
 
 	@Column({ nullable: true })
-	subject: String;
+	subject: String
 
 	@Column({ nullable: true })
-	email: String;
+	email: String
 
 	@Column({ nullable: true })
-	mobile: String;
+	mobile: String
 
 	@Column({ nullable: true })
-	address: String;
+	address: String
 
 	@Column({ default: 'default.jpg' })
-	profile_pic: String;
+	profile_pic: String
 
 	@Column()
-	roll: String;
+	roll: String
 
 	@Column({ nullable: true })
-	dep_id: String;
+	dep_id: String
 
 	@Column({ type: 'text', nullable: true })
-	is_logged: string;
+	is_logged: string
 
 	@Column()
 	@CreateDateColumn()
-	createdAt: Date;
+	createdAt: Date
 
 	@Column()
 	@UpdateDateColumn()
-	updatedAt: Date;
+	updatedAt: Date
 
 	hashPassword() {
 		// this.password = bcrypt.hashSync(this.password, 8);
