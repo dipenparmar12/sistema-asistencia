@@ -1,16 +1,20 @@
 import 'reflect-metadata'
 import * as path from 'path'
+
 import * as dotenv from 'dotenv'
 import * as helmet from 'helmet'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
+
 import { createConnection, Connection } from 'typeorm'
-import appRoutes from './routes/indexRoutes'
 import Student from './entity/Student'
 import Attendance from './entity/Attendance'
 import Teacher from './entity/Teacher'
-// import teacherRoutes from './routes/teacherRoutes'
+
+import appRoutes from './routes/indexRoutes'
+import teacherRoutes from './routes/teacherRoutes'
+import studentRoutes from './routes/studentRoutes'
 
 dotenv.config()
 
@@ -36,7 +40,6 @@ class MyApplication {
 		this._express.use(bodyParser.json())
 		this._express.use(bodyParser.urlencoded({ extended: false }))
 		this._express.use(cookieParser())
-		// this._express.use(express.static('public'))
 		this._express.use('/', express.static(path.join(__dirname, '../public')))
 		this._express.set('views', path.join(__dirname, 'views'))
 		this._express.set('view engine', 'pug')
@@ -46,8 +49,9 @@ class MyApplication {
 	 * Set All Application Routes from External Class's
 	 */
 	private appRoutes(): void {
+		this._express.use('/api/teachers', teacherRoutes)
+		this._express.use('/api/students', studentRoutes)
 		this._express.use(appRoutes)
-		// this._express.use('/api/teachers', teacherRoutes)
 		this.errorRoutes()
 	}
 

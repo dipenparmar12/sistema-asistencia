@@ -1,13 +1,5 @@
 import { EntityRepository } from 'typeorm'
-import {
-	Column,
-	Entity,
-	PrimaryGeneratedColumn,
-	CreateDateColumn,
-	UpdateDateColumn,
-	VersionColumn,
-	Unique,
-} from 'typeorm'
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
 import * as bcrypt from 'bcryptjs'
 
 // ///// username, password, full_name, subject, email, mobile, address, profile_pic, user_type, dep_id

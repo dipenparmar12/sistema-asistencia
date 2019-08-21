@@ -1,17 +1,17 @@
 import { Router } from 'express'
-import controller from './../controllers/teacherController'
+import teacherController from './../controllers/teacherController'
 import authController from './../controllers/authController'
 import { checkJwt } from '../middlewares/checkJwt'
 
 let router = Router()
 
 router
-	.get('/', controller.getAll)
+	.get('/', teacherController.getAll)
 
-	.post('/', controller.create)
-	.get('/:id', controller.getOneById)
-	.patch('/:id', controller.update)
-	.delete('/:id', controller.destroy)
+	.post('/', teacherController.create)
+	.get('/:id', teacherController.getOneById)
+	.patch('/:id', teacherController.update)
+	.delete('/:id', teacherController.destroy)
 
 router.post('/login', authController.login)
 
