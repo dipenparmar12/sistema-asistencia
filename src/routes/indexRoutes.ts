@@ -1,12 +1,17 @@
-import { Router, Request, Response } from 'express';
-import teacherRouter from './teacherRoutes';
+import { Router, Request, Response } from 'express'
+import teacherRouter from './teacherRoutes'
 
-let appRoutes = Router();
+let appRoutes = Router()
+
+////// TeacherRoutes
+appRoutes.use('/api/teachers', teacherRouter)
 
 appRoutes.get('/', (req: Request, res: Response) => {
-	res.send('index');
-});
+	res.send('HomePage')
+})
 
-appRoutes.use('/api/teachers', teacherRouter);
+appRoutes.get('/login', (req: Request, res: Response) => {
+	res.render('teacher_login')
+})
 
-export default appRoutes;
+export default appRoutes

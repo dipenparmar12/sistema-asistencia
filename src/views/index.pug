@@ -1,0 +1,15 @@
+//-  Main_layout (Master Page)
+extends _layout
+
+block append head
+  style.
+    body: {background-color: #fff !important;}
+
+//- Varialbes 
+block append variables
+  - page_tab_title = "Take Attendance"
+  - page_primary_heading = "DashBoard"
+
+//- Page Content 
+block content-fluid
+  h1  Hello there
