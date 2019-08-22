@@ -58,6 +58,12 @@ class AuthController {
 		// res.send(teacher)
 		res.redirect('/index')
 	}
+
+	logout = (req: Request, res: Response) => {
+		res.clearCookie('jwt')
+		res.clearCookie('user')
+		res.render('teacher_login')
+	}
 }
 
 export default new AuthController()

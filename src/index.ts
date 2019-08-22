@@ -51,8 +51,9 @@ class MyApplication {
 	 * Set All Application Routes from External Class's
 	 */
 	private appRoutes(): void {
-		this._express.get('/login', isLogged, authController.loginView)
 		this._express.post('/login', authController.loginAuth)
+		this._express.get('/logout', authController.logout)
+		this._express.get('/login', isLogged, authController.loginView)
 		this._express.use('/api/teachers', checkJwt, teacherRoutes)
 		this._express.use('/api/students', checkJwt, studentRoutes)
 		this._express.use(checkJwt, appRoutes)
