@@ -33,21 +33,21 @@ class AuthController {
 		const jwtToken = jwt.sign(
 			{ id: teacher.id, username: teacher.username, roll: teacher.roll },
 			process.env.JWT_TOKEN,
-			{ expiresIn: '1h' }
+			{ expiresIn: process.env.JWT_TOKEN_EXPIRES_IN_HOUR }
 		)
 
 		///// Saving JwtToken in DB
 		// teacher.is_logged = jwtToken
 		// await teacherRepository.save(teacher)
 
-		res.setHeader('jwt', jwtToken)
+		// res.setHeader('jwt', jwtToken)
 
-		///// Creating Cookie for Auth
-		// res.cookie('jwt', jwtToken, {
-		// 	expires: new Date(Date.now() + process.env.JWT_TOKEN_EXPIRES_IN),
-		// 	// secure:true,
-		// 	httpOnly: true,
-		// })
+		/// Creating Cookie for Auth
+		res.cookie('jwt', jwtToken, {
+			expires: new Date(Date.now() + process.env.JWT_TOKEN),
+			// secure:true,
+			httpOnly: true,
+		})
 
 		//Send the jwt in the response
 		res.send(teacher)

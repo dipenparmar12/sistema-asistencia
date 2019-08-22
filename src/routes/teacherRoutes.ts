@@ -6,12 +6,12 @@ import { checkJwt } from '../middlewares/checkJwt'
 let router = Router()
 
 router
-	.get('/', teacherController.getAll)
+	.get('/', checkJwt, teacherController.getAll)
 
-	.post('/', teacherController.create)
-	.get('/:id', teacherController.getOneById)
-	.patch('/:id', teacherController.update)
-	.delete('/:id', teacherController.destroy)
+	.post('/', checkJwt, teacherController.create)
+	.get('/:id', checkJwt, teacherController.getOneById)
+	.patch('/:id', checkJwt, teacherController.update)
+	.delete('/:id', checkJwt, teacherController.destroy)
 
 router.post('/login', authController.login)
 
