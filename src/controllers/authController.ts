@@ -5,7 +5,12 @@ import Teacher from '../entity/Teacher'
 
 class AuthController {
 	constructor() {}
-	login = async (req: Request, res: Response) => {
+
+	loginView = (req: Request, res: Response) => {
+		res.render('teacher_login')
+	}
+
+	loginAuth = async (req: Request, res: Response) => {
 		//Check if username and password are set
 		let { username, password } = req.body
 		if (!(username && password)) {

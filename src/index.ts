@@ -15,7 +15,7 @@ import Teacher from './entity/Teacher'
 import appRoutes from './routes/indexRoutes'
 import teacherRoutes from './routes/teacherRoutes'
 import studentRoutes from './routes/studentRoutes'
-import { checkJwt } from './middlewares/checkJwt'
+import { checkJwt, isLogged } from './middlewares/checkJwt'
 import authController from './controllers/authController'
 
 dotenv.config()
@@ -51,10 +51,11 @@ class MyApplication {
 	 * Set All Application Routes from External Class's
 	 */
 	private appRoutes(): void {
-		this._express.post('/login', authController.login)
+		this._express.get('/login', isLogged, authController.loginView)
+		this._express.post('/login', authController.loginAuth)
 		this._express.use('/api/teachers', checkJwt, teacherRoutes)
 		this._express.use('/api/students', checkJwt, studentRoutes)
-		this._express.use(appRoutes)
+		this._express.use(checkJwt, appRoutes)
 		this.errorRoutes()
 	}
 
