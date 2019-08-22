@@ -4,8 +4,8 @@ import { Request, Response, NextFunction } from 'express'
 export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
 	//Get the jwt token from the head
 	// const token = <string>req.headers['auth']
-	let jwtPayload
 	let jwtCookieToken = req.cookies.jwt
+	let jwtPayload
 	// console.log(jwtCookieToken)
 
 	//Try to validate the token and get data
@@ -15,8 +15,8 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
 	} catch (err) {
 		// If token is not valid, respond with 401 (unauthorized)
 		// Throw an error just in case anything goes wrong with verification
-		// throw new Error(err)
 		res.status(401).send('401 (unauthorized), Please login first')
+		throw new Error(err)
 		return
 	}
 
