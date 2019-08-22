@@ -1,0 +1,39 @@
+//-  Main_layout (Master Page)
+extends _layout
+
+block append head
+  style.
+    body: {background-color: #fff !important;}
+
+//- Varialbes 
+block append variables
+  - page_tab_title = "Take Attendance"
+  - page_primary_heading = "Student List"
+
+//- Page Content 
+block content-fluid
+  .row
+    h3 Jquery
+
+  form(action='', id='attendance_submit_form')
+    .row 
+      h1 #{message}
+    .row  
+      a.btn.btn-info(href='#' id='register_student_btn') Add Student           
+      a.btn.btn-info() Absent all
+    .row
+      // Table.
+      table#student_list.table.table-fixed
+        // Table head
+        thead
+          tr
+            th.th-lg(width='4%')
+              a  Sr
+            th.th-lg
+              a  img 
+            th.th-lg
+              a  Full Name 
+            th.th-lg
+              a  Roll
+            th.th-lg
+              a  Actions

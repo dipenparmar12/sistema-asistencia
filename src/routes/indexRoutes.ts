@@ -1,13 +1,17 @@
 import { Router, Request, Response } from 'express'
 
-let appRoutes = Router()
+let route = Router()
 
-appRoutes.get('/registration', (req: Request, res: Response) => {
-	res.render('teacher_registration')
-})
-
-appRoutes.get('/index', (req: Request, res: Response) => {
+route.get('/index', (req: Request, res: Response) => {
 	res.render('index')
 })
 
-export default appRoutes
+route.get('/registration', (req: Request, res: Response) => {
+	res.render('teacher_registration')
+})
+
+route.get('/attendance', (req: Request, res: Response) => {
+	res.render('attendance')
+})
+
+export default route

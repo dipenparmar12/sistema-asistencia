@@ -15,8 +15,8 @@ import Teacher from './entity/Teacher'
 import appRoutes from './routes/indexRoutes'
 import teacherRoutes from './routes/teacherRoutes'
 import studentRoutes from './routes/studentRoutes'
-import { checkJwt, isLogged } from './middlewares/checkJwt'
 import authController from './controllers/authController'
+import { checkJwt, isLogged } from './middlewares/checkJwt'
 
 dotenv.config()
 

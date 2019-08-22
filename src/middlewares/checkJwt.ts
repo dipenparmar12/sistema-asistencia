@@ -1,7 +1,7 @@
 import * as jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 
-export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
+export const checkJwt = async (req: Request, res: Response, next: NextFunction) => {
 	//Get the jwt token from the head
 	// const token = <string>req.headers['auth']
 	let jwtCookieToken = req.cookies.jwt
@@ -10,7 +10,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
 
 	//Try to validate the token and get data
 	try {
-		jwtPayload = <any>jwt.verify(jwtCookieToken, process.env.JWT_TOKEN)
+		jwtPayload = await (<any>jwt.verify(jwtCookieToken, process.env.JWT_TOKEN))
 		res.locals.jwtPayload = jwtPayload
 	} catch (err) {
 		// If token is not valid, respond with 401 (unauthorized)
@@ -41,7 +41,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
 	next()
 }
 
-export const isLogged = (req: Request, res: Response, next: NextFunction) => {
+export const isLogged = async (req: Request, res: Response, next: NextFunction) => {
 	//Get the jwt token from the head
 	// const token = <string>req.headers['auth']
 	let jwtCookieToken = req.cookies.jwt
@@ -50,7 +50,7 @@ export const isLogged = (req: Request, res: Response, next: NextFunction) => {
 
 	//Try to validate the token and get data
 	try {
-		jwtPayload = <any>jwt.verify(jwtCookieToken, process.env.JWT_TOKEN)
+		jwtPayload = await (<any>jwt.verify(jwtCookieToken, process.env.JWT_TOKEN))
 		res.locals.jwtPayload = jwtPayload
 	} catch (err) {
 		// If token is not valid, respond with 401 (unauthorized)
@@ -64,7 +64,7 @@ export const isLogged = (req: Request, res: Response, next: NextFunction) => {
 	// We want to send a new token on every request
 	const { id, username, roll } = jwtPayload
 	//Sing JWT, valid for 1 hour
-	const jwtToken = jwt.sign({ id, username, roll }, process.env.JWT_TOKEN, {
+	const jwtToken = await jwt.sign({ id, username, roll }, process.env.JWT_TOKEN, {
 		expiresIn: process.env.JWT_TOKEN_EXPIRES_IN_HOUR,
 	})
 
