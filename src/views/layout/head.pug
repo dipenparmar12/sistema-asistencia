@@ -42,3 +42,11 @@ link(href='/assets/css/material-dashboard.min.css?v=2.1.0', rel='stylesheet')
 
 // custom css
 link(href='/stylesheets/custom.css', rel='stylesheet')
+
+
+//// Method for geting cookie value by its name 
+script.
+  getCookie = function(name){
+  var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+    if (match) return match[2]
+  }

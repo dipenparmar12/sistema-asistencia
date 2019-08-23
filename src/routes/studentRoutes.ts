@@ -1,7 +1,5 @@
 import { Router, Request, Response } from 'express'
 import studentcontroller from '../controllers/studentController'
-import authController from '../controllers/authController'
-import { checkJwt } from '../middlewares/checkJwt'
 
 let router = Router()
 

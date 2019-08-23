@@ -12,9 +12,8 @@
       .photo
         img(src='/images/student/img (3).jpg')
       .user-info
-        a.username(href='#collapseExample', data-toggle='collapse')
-          span
-            | #{user_name}
+        a#username(href='#collapseExample', data-toggle='collapse')
+          span #{user_name}
             b.caret
         #collapseExample.collapse
           ul.nav
@@ -30,6 +29,10 @@
               a.nav-link(href='#')
                 span.sidebar-mini  S 
                 span.sidebar-normal  Settings 
+            li.nav-item
+              a.nav-link(href='/logout')
+                span.sidebar-mini  S 
+                span.sidebar-normal  Logout 
     ul.nav
       li.nav-item
         a.nav-link(href='/attendance')
