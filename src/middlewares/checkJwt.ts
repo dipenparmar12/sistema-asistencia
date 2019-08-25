@@ -52,6 +52,8 @@ const _checkJwt = async (req: Request, res: Response, next: any) => {
 	/// creating Cookie of Logged user Details in claint machine
 	res.cookie('username', username)
 	res.cookie('teacher_id', id)
+	res.locals.username = username
+	res.locals.id = id
 
 	//Call the next middleware or controller
 	if (next == 'redirect') {
