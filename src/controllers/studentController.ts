@@ -36,22 +36,29 @@ class StudentController extends CrudController {
 
 	create = async (req: Request, res: Response) => {
 		//Get parameters from the body
-		let { username, password, name, email, subject, roll } = req.body
+		let { roll_no, enrollment_no, name, subject, email, mobile, address } = req.body
 
 		let data = new Student()
-		// data.username = username
-		// data.password = password
-		// data.name = name
-		// data.email = email
-		// data.subject = subject
-		// data.roll = roll
+		data.roll_no = roll_no
+		data.enrollment_no = enrollment_no
+		data.name = name
+		data.subject = subject
+		data.email = email
+		data.subject = subject
+		data.mobile = mobile
+		data.address = address
+
+		/// filename that stored with same_name
+		if (req.files.length > 0) {
+			data.profile_pic = req.cookies.jwt + '_' + req.files[0].originalname.split('.')[0] + '.jpg'
+		}
 
 		//Validade if the parameters are ok
-		const errors = await validate(data)
-		if (errors.length > 0) {
-			res.status(400).send(errors)
-			return
-		}
+		// const errors = await validate(data)
+		// if (errors.length > 0) {
+		// 	res.status(400).send(errors)
+		// 	return
+		// }
 
 		//Try to save. If fails, the teachername is already in use
 		const databaseRepository = getRepository(Student)

@@ -18,27 +18,7 @@ import studentRoutes from './routes/studentRoutes'
 import authController from './controllers/authController'
 import { checkJwt, isLogged } from './middlewares/checkJwt'
 
-import * as multer from 'multer'
-
 dotenv.config()
-
-// const set_multer_storage = multer.diskStorage({
-// 	destination: function(req, file, cb) {
-// 		cb(null, './uploads')
-// 	},
-// 	filename: function(req, file, cb) {
-// 		cb(null, file.fieldname + '-' + Date.now())
-// 	},
-// })
-
-// const multer_filter = (req, file, callBack) => {
-// 	// console.log(file)
-// 	const fileMime: string = file.mimetype
-// 	if (fileMime.startsWith('image')) {
-// 		return callBack(null, true)
-// 	}
-// 	return callBack(new Error('Only image files are allowed!'), false)
-// }
 
 class MyApplication {
 	public _express: express.Application = express()

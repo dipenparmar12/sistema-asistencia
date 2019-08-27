@@ -3,7 +3,11 @@ import { Request, Response, NextFunction } from 'express'
 
 /////  if 3rd param is next() & jwt cookie token is NOT valid then just redirected to LoginPage
 export const checkJwt = async (req: Request, res: Response, next: NextFunction) => {
-	_checkJwt(req, res, next)
+	try {
+		_checkJwt(req, res, next)
+	} catch (error) {
+		res.status(401).render('errors/404')
+	}
 }
 
 /////  if 3rd param is 'redirect' & if jwt cookie token is valid then just redirected to home page
@@ -28,7 +32,7 @@ const _checkJwt = async (req: Request, res: Response, next: any) => {
 		// If token is not valid, respond with 401 (unauthorized)
 		// Throw an error just in case anything goes wrong with verification
 		res.status(401).render('teacher_login', { error: '401 (unauthorized), Please login first' })
-		throw new Error(err)
+		// throw new Error(err)
 		return
 	}
 
