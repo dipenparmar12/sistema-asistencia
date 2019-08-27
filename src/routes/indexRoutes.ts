@@ -1,5 +1,10 @@
 import { Router, Request, Response } from 'express'
+import { checkRoll } from './../middlewares/checkRoll'
 let route = Router()
+
+route.get('/teacher_registration', checkRoll, (req: Request, res: Response) => {
+	res.render('teacher_registration')
+})
 
 route.get('/registration', (req: Request, res: Response) => {
 	res.render('student_registration')

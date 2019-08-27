@@ -53,24 +53,28 @@ class StudentController extends CrudController {
 			data.profile_pic = req.cookies.jwt + '_' + req.files[0].originalname.split('.')[0] + '.jpg'
 		}
 
-		//Validade if the parameters are ok
-		// const errors = await validate(data)
-		// if (errors.length > 0) {
-		// 	res.status(400).send(errors)
-		// 	return
-		// }
+		// /// Validade if the parameters are ok
+		const errors = await validate(data)
+		if (errors.length > 0) {
+			res.status(400).send(errors)
+			return
+		}
 
 		//Try to save. If fails, the teachername is already in use
 		const databaseRepository = getRepository(Student)
 		try {
 			await databaseRepository.save(data)
 		} catch (e) {
-			res.status(200).json({ status: 'fail', message: e.message, error: e, data: false })
+			res.status(401).render('student_registration', { errors: e })
+			// res.status(401).json({ status: 'fail', message: e.message, error: e, data: false })
 			return
 		}
 
 		//If all ok, send 201 response
-		res.status(201).send('Student created')
+		res.status(201).render('/student_registration')
+		// res
+		// 	.status(201)
+		// 	.render('/student_registration', { status: 'success', message: 'Student c', error: false, data: null })
 	}
 
 	update = async (req: Request, res: Response) => {

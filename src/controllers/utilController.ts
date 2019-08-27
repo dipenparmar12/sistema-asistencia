@@ -23,4 +23,6 @@ const upload = multer({
 	},
 }).array('profile_pic', 3)
 
+const fileRename = () => {}
+
 export { upload }

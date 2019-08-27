@@ -12,8 +12,11 @@ export const checkJwt = async (req: Request, res: Response, next: NextFunction) 
 
 /////  if 3rd param is 'redirect' & if jwt cookie token is valid then just redirected to home page
 export const isLogged = async (req: Request, res: Response, next: NextFunction) => {
-	// const redirectMethod =
-	_checkJwt(req, res, 'redirect')
+	try {
+		_checkJwt(req, res, 'redirect')
+	} catch (error) {
+		res.status(401).render('errors/404')
+	}
 }
 
 //////// Method  created Code Reusablity of ChecKJWT & isLogged both method using 95% same Code

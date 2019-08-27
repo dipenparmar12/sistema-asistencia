@@ -64,6 +64,8 @@ class AuthController {
 		res.clearCookie('user')
 		res.render('teacher_login')
 	}
+
+	getRoll = (req: Request, res: Response) => {}
 }
 
 export default new AuthController()

@@ -1,12 +1,13 @@
 import { Router } from 'express'
 import teacherController from './../controllers/teacherController'
+import { checkRoll } from './../middlewares/checkRoll'
 
 let router = Router()
 
 router
 	.get('/', teacherController.getAll)
 
-	.post('/', teacherController.create)
+	.post('/', checkRoll, teacherController.create)
 	.get('/:id', teacherController.getOneById)
 	.patch('/:id', teacherController.update)
 	.delete('/:id', teacherController.destroy)
