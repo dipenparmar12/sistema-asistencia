@@ -1,0 +1,10 @@
+"id","roll_no","enrollment_no","name","subject","email","mobile","address","profile_pic","createdAt","updatedAt","teacherId"
+"81a4f848-7779-44cc-a3a2-013950a58ef4","14","123451","dipends",NULL,NULL,NULL,NULL,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNiNjBhNGJlLWY0MjUtNDAwNC1iMGM2LWY1OGUzMTBhNGE0ZiIsInVzZXJuYW1lIjoiZGlwZW5kcyIsInJvbGwiOiJwcmluY2lwbGUiLCJpYXQiOjE1NjY5MjAyMzgsImV4cCI6MTU2NjkyMzgzOH0.V8fr77k7y12WISwtMq8YUO8FrTF7fEHVSLKspzwPyFc_ZZZZ.jpg","2019-08-27 21:07:21.033188","2019-08-27 21:07:21.033188",NULL
+"8eeb4f29-be90-4213-b29f-4d2338bb340e","2","2","Dpn",NULL,"dpn@gmai.com","1234","Address is 
+Kutch","default.jpg","2019-08-28 18:04:19.330157","2019-08-28 18:04:19.330157",NULL
+"90d0b7de-b72b-4bce-817b-0f4dba5519ae","1","1","Priyanka",NULL,"p@gmai.com","123","Address is 
+Rajkot ","default.jpg","2019-08-28 18:03:00.640461","2019-08-28 18:03:00.640461",NULL
+"98bcb23c-26c7-4f62-a428-1451832a5888","5","5","HITESH",NULL,"h@gmail.com","789","Address is gandhidham","default.jpg","2019-08-28 18:06:18.066265","2019-08-28 18:06:18.066265",NULL
+"a60f7e2a-0cfa-4a2a-91bc-5d9196f3c5f5","4","4","Komu",NULL,"Dhuli@gmail.com","123456","my Address is Rajkot (Batva)","default.jpg","2019-08-28 18:05:46.524264","2019-08-28 18:05:46.524264",NULL
+"cadadf9c-004f-4226-9657-9260f4c8164b","3","3","Neo",NULL,"Neo@gmai.com","12345","Address is 
+Anjar","default.jpg","2019-08-28 18:04:55.533479","2019-08-28 18:04:55.533479",NULL

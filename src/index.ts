@@ -7,7 +7,7 @@ import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 
-import { createConnection, Connection, getRepository, Column } from 'typeorm'
+import { createConnection, Connection, getRepository, Column, getConnection } from 'typeorm'
 import Student from './entity/Student'
 import Attendance from './entity/Attendance'
 import Teacher from './entity/Teacher'
@@ -21,8 +21,6 @@ import * as utilController from './controllers/utilController'
 import teacherController from './controllers/teacherController'
 import authController from './controllers/authController'
 import { checkJwt, isLogged } from './middlewares/checkJwt'
-import * as fs from 'fs'
-import * as csv from 'fast-csv'
 
 dotenv.config()
 
@@ -39,23 +37,48 @@ class MyApplication {
 		this._express.listen(this.port, () => {
 			console.log(process.env.APP_NAME + ', Started At:' + this.port)
 		})
-		// this.insertFakeData()
+		this.insertFakeData()
 	}
 
 	public async insertFakeData() {
 		console.log(' insertFakeData() Method')
-		let teachers: any = await utilController.get_csv_teacher_Promise.then(data => data)
-		// console.log(teachers)
 
-		createConnection(/*...*/)
-			.then(async connection => {
-				let teacherRepository = getRepository(Teacher)
-				teachers.forEach(teacher => {
-					teacherRepository.save(teacher)
-					console.log('User:' + teacher.username + ' inserted.')
-				})
-			})
-			.catch(error => console.log(error))
+		let teachers: any = await utilController.getCsvData('./src/fixtures/teachers.csv').then(data => data)
+		let students: any = await utilController.getCsvData('./src/fixtures/students.csv').then(data => data)
+		// console.log(students)
+
+		const con = getConnection()
+		let teacherRepository = getRepository(Teacher)
+		let studentRepository = getRepository(Student)
+
+
+		teachers.forEach(teacher => {
+			
+			console.log('User:' + teacher.username + ' inserted.')
+			// students.forEach(stud => {
+			// 	stud.teacher_id = teacher.id
+			// 	stud.name = stud.name +' '+ teacher.username
+			// 	studentRepository.create(stud)
+			// })
+		})
+
+		// console.log(await teacherRepository.find())
+		// let test = await con.manager.find(Teacher)
+		// console.log(test)
+
+		// createConnection(/*...*/)
+		// 	.then(async connection => {
+		// let teacherRepository = getRepository(Teacher)
+		// let studentRepository = getRepository(Student)
+		// teachers.forEach(teacher => {
+		// 	teacherRepository.save(teacher)
+		// 	// students.forEach(stud => {
+		// 	// 	studentRepository.save(stud.username + teacher.username)
+		// 	// })
+		// 	console.log('User:' + teacher.username + ' inserted.')
+		// })
+		// 	})
+		// 	.catch(error => console.log(error))
 	}
 
 	/**

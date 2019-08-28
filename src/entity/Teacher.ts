@@ -1,6 +1,7 @@
-import { EntityRepository } from 'typeorm'
+import { EntityRepository, JoinTable } from 'typeorm'
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
 import * as bcrypt from 'bcryptjs'
+import Student from './Student'
 
 // ///// username, password, full_name, subject, email, mobile, address, profile_pic, user_type, dep_id
 // // Teachers Table
@@ -66,6 +67,9 @@ export default class Teacher {
 	@Column()
 	@UpdateDateColumn()
 	updatedAt: Date
+
+	@JoinTable()
+	students: Student[]
 
 	hashPassword() {
 		this.password = bcrypt.hashSync(this.password + '', 12)

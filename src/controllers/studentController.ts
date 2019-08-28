@@ -71,7 +71,7 @@ class StudentController extends CrudController {
 		}
 
 		//If all ok, send 201 response
-		res.status(201).render('/student_registration')
+		res.status(201).redirect('/registration')
 		// res
 		// 	.status(201)
 		// 	.render('/student_registration', { status: 'success', message: 'Student c', error: false, data: null })

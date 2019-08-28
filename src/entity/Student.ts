@@ -1,7 +1,8 @@
-import { EntityRepository, OneToMany, JoinTable, ManyToOne } from 'typeorm'
+import { EntityRepository, OneToMany, JoinTable, ManyToOne, Generated } from 'typeorm'
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
 import Attendance from './Attendance'
 import Teacher from './Teacher'
+import { IsUUID } from 'class-validator'
 
 // ///// id, roll_no, enrollment_no, full_name, email, mobile, address, dob, profile_pic
 // //// Students Table
@@ -48,6 +49,10 @@ export default class Student {
 
 	@Column({ default: 'default.jpg' })
 	profile_pic: String
+
+	// @Column()
+	// @Generated('uuid')
+	// teacher_id: String
 
 	@Column()
 	@CreateDateColumn()

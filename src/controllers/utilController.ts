@@ -26,36 +26,34 @@ const upload = multer({
 	},
 }).array('profile_pic', 3)
 
-const getTeacherObject_from_array = async teacherInput => {
+const get_teacherEntity_fromObject = async teacherObject => {
 	let teacher: Teacher = new Teacher()
-	teacher.username = teacherInput.username
-	teacher.password = teacherInput.password
-	teacher.name = teacherInput.name
-	teacher.subject = teacherInput.subject
-	teacher.email = teacherInput.email
-	teacher.mobile = teacherInput.mobile
-	teacher.address = teacherInput.address
-	teacher.roll = teacherInput.roll
+	teacher.username = teacherObject.username
+	teacher.password = teacherObject.password
+	teacher.name = teacherObject.name
+	teacher.subject = teacherObject.subject
+	teacher.email = teacherObject.email
+	teacher.mobile = teacherObject.mobile
+	teacher.address = teacherObject.address
+	teacher.roll = teacherObject.roll
 	return teacher
-	// let teacherRepository = getRepository(Teacher)
-	// await teacherRepository.save(teacher)
-	// console.log('Data inserted: ' + teacherInput.username)
 }
 
-const get_csv_teacher_Promise = new Promise((resolve, reject) => {
-	let list: any = []
-	try {
-		fs.createReadStream('./src/fixtures/teacher1.csv')
-			.pipe(csv.parse({ headers: true }))
-			.on('data', teacher => {
-				list.push(teacher)
-			})
-			.on('end', data => {
-				resolve(list)
-			})
-	} catch (error) {
-		reject(error)
-	}
-})
-
-export { upload, getTeacherObject_from_array, get_csv_teacher_Promise }
+const getCsvData = (csvFilePath: string = './src/fixtures/teachers.csv') => {
+	return new Promise((resolve, reject) => {
+		let list: any = []
+		try {
+			fs.createReadStream(csvFilePath)
+				.pipe(csv.parse({ headers: true }))
+				.on('data', teacher => {
+					list.push(teacher)
+				})
+				.on('end', data => {
+					resolve(list)
+				})
+		} catch (error) {
+			reject(error)
+		}
+	})
+}
+export { upload, get_teacherEntity_fromObject, getCsvData }
