@@ -1,5 +1,4 @@
 import Teacher from '../entity/Teacher'
-import { getRepository } from 'typeorm'
 import * as fs from 'fs'
 import * as csv from 'fast-csv'
 import multer = require('multer')
@@ -43,16 +42,20 @@ const getTeacherObject_from_array = async teacherInput => {
 	// console.log('Data inserted: ' + teacherInput.username)
 }
 
-const get_csv_Promise = new Promise((resolve, reject) => {
+const get_csv_teacher_Promise = new Promise((resolve, reject) => {
 	let list: any = []
-	fs.createReadStream('./docs/teacher1.csv')
-		.pipe(csv.parse({ headers: true }))
-		.on('data', teacher => {
-			list.push(teacher)
-		})
-		.on('end', data => {
-			resolve(list)
-		})
+	try {
+		fs.createReadStream('./src/fixtures/teacher1.csv')
+			.pipe(csv.parse({ headers: true }))
+			.on('data', teacher => {
+				list.push(teacher)
+			})
+			.on('end', data => {
+				resolve(list)
+			})
+	} catch (error) {
+		reject(error)
+	}
 })
 
-export { upload, getTeacherObject_from_array, get_csv_Promise }
+export { upload, getTeacherObject_from_array, get_csv_teacher_Promise }

@@ -21,6 +21,8 @@ import * as utilController from './controllers/utilController'
 import teacherController from './controllers/teacherController'
 import authController from './controllers/authController'
 import { checkJwt, isLogged } from './middlewares/checkJwt'
+import * as fs from 'fs'
+import * as csv from 'fast-csv'
 
 dotenv.config()
 
@@ -37,19 +39,23 @@ class MyApplication {
 		this._express.listen(this.port, () => {
 			console.log(process.env.APP_NAME + ', Started At:' + this.port)
 		})
+		this.insertFakeData()
 	}
 
 	public async insertFakeData() {
 		console.log(' test() Method')
-		let teachers: any = await utilController.get_csv_teacher_Promise.then()
-		createConnection()
-			.then(async connection => {
-				let teacherRepository = getRepository(Teacher)
-				teachers.forEach(teacher => {
-					teacherRepository.save(teacher)
-				})
-			})
-			.catch(error => console.log(error))
+
+		let teachers: any = await utilController.get_csv_teacher_Promise.then(data => data)
+		console.log(teachers)
+
+		// createConnection()
+		// 	.then(async connection => {
+		// 		let teacherRepository = getRepository(Teacher)
+		// 		teachers.forEach(teacher => {
+		// 			teacherRepository.save(teacher)
+		// 		})
+		// 	})
+		// 	.catch(error => console.log(error))
 	}
 
 	/**
@@ -123,5 +129,4 @@ class MyApplication {
 }
 
 let app = new MyApplication()
-
 export default app
