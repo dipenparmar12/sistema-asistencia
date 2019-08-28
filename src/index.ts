@@ -39,23 +39,23 @@ class MyApplication {
 		this._express.listen(this.port, () => {
 			console.log(process.env.APP_NAME + ', Started At:' + this.port)
 		})
-		this.insertFakeData()
+		// this.insertFakeData()
 	}
 
 	public async insertFakeData() {
-		console.log(' test() Method')
-
+		console.log(' insertFakeData() Method')
 		let teachers: any = await utilController.get_csv_teacher_Promise.then(data => data)
-		console.log(teachers)
+		// console.log(teachers)
 
-		// createConnection()
-		// 	.then(async connection => {
-		// 		let teacherRepository = getRepository(Teacher)
-		// 		teachers.forEach(teacher => {
-		// 			teacherRepository.save(teacher)
-		// 		})
-		// 	})
-		// 	.catch(error => console.log(error))
+		createConnection(/*...*/)
+			.then(async connection => {
+				let teacherRepository = getRepository(Teacher)
+				teachers.forEach(teacher => {
+					teacherRepository.save(teacher)
+					console.log('User:' + teacher.username + ' inserted.')
+				})
+			})
+			.catch(error => console.log(error))
 	}
 
 	/**
@@ -129,4 +129,8 @@ class MyApplication {
 }
 
 let app = new MyApplication()
+// if (process.env.NODE_ENV == 'dev') {
+// 	app.insertFakeData()
+// }
+
 export default app
