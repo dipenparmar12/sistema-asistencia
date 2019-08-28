@@ -45,22 +45,41 @@ class MyApplication {
 
 		let teachers: any = await utilController.getCsvData('./src/fixtures/teachers.csv').then(data => data)
 		let students: any = await utilController.getCsvData('./src/fixtures/students.csv').then(data => data)
-		// console.log(students)
+		// console.log(teachers[1])
 
 		const con = getConnection()
 		let teacherRepository = getRepository(Teacher)
 		let studentRepository = getRepository(Student)
 
+		teachers.forEach( async teacher => {
+			let t = await teacherRepository.save(teacher).catch(e => {
+				console.log(e)
+			})
 
-		teachers.forEach(teacher => {
-			
-			console.log('User:' + teacher.username + ' inserted.')
-			// students.forEach(stud => {
-			// 	stud.teacher_id = teacher.id
-			// 	stud.name = stud.name +' '+ teacher.username
-			// 	studentRepository.create(stud)
-			// })
+			students.forEach(async stud => {
+				stud.name = null
+				stud.enrollment_no = null 
+				stud.teacherid = null 
+
+				stud.name = 'A ' + Math.floor(Math.random() * (10000000 - 1) + 1)
+				stud.enrollment_no = Math.floor(Math.random() * (10000000 - 1) + 1)
+				stud.teacherid = t.id
+				
+				console.log(stud)
+				let s = await studentRepository.save(stud).catch(e => {
+					console.log(e)
+				})
+			})
 		})
+
+		// teachers.forEach(teacher => {
+		// console.log('User:' + teacher.username + ' inserted.')
+		// students.forEach(stud => {
+		// 	stud.teacher_id = teacher.id
+		// 	stud.name = stud.name +' '+ teacher.username
+		// 	studentRepository.create(stud)
+		// })
+		// })
 
 		// console.log(await teacherRepository.find())
 		// let test = await con.manager.find(Teacher)
@@ -152,8 +171,4 @@ class MyApplication {
 }
 
 let app = new MyApplication()
-// if (process.env.NODE_ENV == 'dev') {
-// 	app.insertFakeData()
-// }
-
 export default app

@@ -51,7 +51,7 @@ export default class Teacher {
 	@Column({ default: 'default.jpg' })
 	profile_pic: String
 
-	@Column()
+	@Column({ default: 'teacher' })
 	roll: String
 
 	@Column({ nullable: true })
