@@ -13,7 +13,7 @@ class StudentController extends CrudController {
 	getAll = async (req: Request, res: Response) => {
 		//Get data from database
 		const databaseRepository = getRepository(Student)
-		const data = await databaseRepository.find()
+		const data = await databaseRepository.find({ relations: ['teacher'] })
 
 		//Send the data object
 		res.status(200).json({ status: 'success', message: 'Data Found', error: false, data: data })

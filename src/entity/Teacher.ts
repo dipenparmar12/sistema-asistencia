@@ -1,4 +1,4 @@
-import { EntityRepository, JoinTable } from 'typeorm'
+import { EntityRepository, JoinTable, OneToMany } from 'typeorm'
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
 import * as bcrypt from 'bcryptjs'
 import Student from './Student'
@@ -68,8 +68,11 @@ export default class Teacher {
 	@UpdateDateColumn()
 	updatedAt: Date
 
-	@JoinTable()
+	@OneToMany(type => Student, student => student.teacher)
 	students: Student[]
+
+	// @JoinTable()
+	// stud: Student[]
 
 	hashPassword() {
 		this.password = bcrypt.hashSync(this.password + '', 12)

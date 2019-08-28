@@ -42,6 +42,7 @@ const _checkJwt = async (req: Request, res: Response, next: any) => {
 	// The token is valid for 1 hour
 	// We want to send a new token on every request
 	const { id, username, roll } = jwtPayload
+
 	//Sing JWT, valid for 1 hour
 	const jwtToken = jwt.sign({ id, username, roll }, process.env.JWT_TOKEN, {
 		expiresIn: process.env.JWT_TOKEN_EXPIRES_IN_HOUR,
@@ -61,6 +62,7 @@ const _checkJwt = async (req: Request, res: Response, next: any) => {
 	res.cookie('teacher_id', id)
 	res.locals.username = username
 	res.locals.id = id
+	res.locals.roll = roll
 
 	//Call the next middleware or controller
 	if (next == 'redirect') {

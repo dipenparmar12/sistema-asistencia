@@ -13,7 +13,7 @@ class TeacherController extends CrudController {
 	getAll = async (req: Request, res: Response) => {
 		//Get data from database
 		const databaseRepository = getRepository(Teacher)
-		const selectAttributes: any = { select: ['id', 'name', 'username', 'roll'] }
+		const selectAttributes: any = { select: ['id', 'name', 'username', 'roll'], relations: ['students'] }
 		const data = await databaseRepository.find(selectAttributes)
 
 		//Send the data object
