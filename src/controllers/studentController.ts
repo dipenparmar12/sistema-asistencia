@@ -3,6 +3,7 @@ import { CrudController } from './crudController'
 import Student from '../entity/Student'
 import { getRepository } from 'typeorm'
 import { validate } from 'class-validator'
+import Teacher from '../entity/Teacher'
 
 class StudentController extends CrudController {
 	public _temp: string = 'name'
@@ -36,7 +37,7 @@ class StudentController extends CrudController {
 
 	create = async (req: Request, res: Response) => {
 		//Get parameters from the body
-		let { roll_no, enrollment_no, name, subject, email, mobile, address } = req.body
+		let { roll_no, enrollment_no, name, subject, email, mobile, address, teacherId } = req.body
 
 		let data = new Student()
 		data.roll_no = roll_no
@@ -47,6 +48,7 @@ class StudentController extends CrudController {
 		data.subject = subject
 		data.mobile = mobile
 		data.address = address
+		// data.teacher = teacherId
 
 		/// filename that stored with same_name
 		if (req.files.length > 0) {
@@ -62,7 +64,15 @@ class StudentController extends CrudController {
 
 		//Try to save. If fails, the teachername is already in use
 		const databaseRepository = getRepository(Student)
+		const teacherRepository = getRepository(Teacher)
 		try {
+			////// for FK, entry will be stored with FK with Logged Teacher
+			const loggedTeacher = await teacherRepository.findOne({ where: { id: res.locals.id } })
+			console.log(loggedTeacher)
+
+			//// Relation Maping Table FK with Logged Teacher (ORM)
+			data.teacher = loggedTeacher
+
 			await databaseRepository.save(data)
 		} catch (e) {
 			res.status(401).render('student_registration', { errors: e })

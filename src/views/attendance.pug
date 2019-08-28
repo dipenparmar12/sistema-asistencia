@@ -30,6 +30,8 @@ block content-fluid
         // Table head
         thead
           tr
+            th.th-lg(width='2%')
+              a  Temp
             th.th-lg(width='4%')
               a  Sr
             th.th-lg
@@ -42,9 +44,9 @@ block content-fluid
               a  Actions
         each stud,i in students
           tr(class='row_present')
-            td#present_absent_handler.d-none
-              input.present_radio_btn(type='radio', name='a', value='', checked)
-              input.absent_radio_btn(type='radio', name='a', value='',)
+            td#present_absent_handler
+              input.present_radio_btn(type='radio', name=stud.id, value='present', checked)
+              input.absent_radio_btn(type='radio', name=stud.id, value='absent',)
             td.sr=i+1
             td(width='10%')
               img.img-responsive.rounded-circle(height='50', width='50' alt='img', src='/uploads/'+stud.profile_pic)

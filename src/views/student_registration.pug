@@ -22,11 +22,12 @@ block content-fluid
         p.card-category Registration form
       .card-body
         form.form-group.form-file-upload.form-file-simple(action='/api/students/', enctype="multipart/form-data" , method="POST")
+          input(type='hidden', name='teacherId', value=teacherId)
           .row.mt-4
             .col-md-6
               .form-group.bmd-form-group
                 label.bmd-label-floating Full Name
-                input.form-control(type='text', name='name')
+                input.form-control(type='text', name='name', required)
             .col-md-6
               .form-group.bmd-form-group
                 label.bmd-label-floating Email address
@@ -45,7 +46,7 @@ block content-fluid
             .col-md-4
               .form-group.bmd-form-group
                 label.bmd-label-floating enrollment_no
-                input.form-control(type='text', name='enrollment_no'  )
+                input.form-control(type='text', name='enrollment_no', required )
             .col-md-4
               .form-group.bmd-form-group
                 label.bmd-label-floating Birthdate
@@ -54,7 +55,7 @@ block content-fluid
             .col-3
               .form-group.bmd-form-group
                 label.bmd-label-floating RollNo
-                input.form-control(type='number', name='roll_no'  )
+                input.form-control(type='number', name='roll_no', required )
             .col-3
               .custom-file
                 input#profile_pic.custom-file-input(type='file', name='profile_pic', accept="image/*", )

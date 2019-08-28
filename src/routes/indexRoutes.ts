@@ -16,7 +16,7 @@ route.get('/teacher_registration', isPrinciple, (req: Request, res: Response) =>
 })
 
 route.get('/registration', (req: Request, res: Response) => {
-	res.render('student_registration')
+	res.render('student_registration', { teacherId: res.locals.id })
 })
 
 route.get('/index', (req: Request, res: Response) => {
