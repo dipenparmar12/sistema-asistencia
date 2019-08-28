@@ -9,6 +9,7 @@
 		"devi": "nodemon src/index.ts",
 		"build": "tsc -p .",
 		"dev": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+		"d": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
 		"prod": "tsc && node ./build/app.js",
 		"migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
 		"p": "parcel src/index.ts"
@@ -45,6 +46,7 @@
 		"typescript": "^3.5.3"
 	},
 	"devDependencies": {
+		"fast-csv": "^3.4.0",
 		"nodemon": "^1.19.1"
 	}
 }

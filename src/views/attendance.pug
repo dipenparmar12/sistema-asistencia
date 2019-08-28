@@ -37,3 +37,26 @@ block content-fluid
               a  Roll
             th.th-lg
               a  Actions
+
+          tr(class='row_present')
+            td#present_absent_handler
+              input.present_radio_btn(type='radio', name='a', value='', checked)
+              input.absent_radio_btn(type='radio', name='a', value='',)
+            td.sr 1
+            td(width='10%')
+              img.img-responsive.rounded-circle(height='50', width='50' alt='img', src='/')
+            td(style='max-width:50px') DIPENDS
+            td rol
+            td.td-actions.text-right
+              .dropdown.pull-left
+                button.btn.btn-round.btn-info.dropdown-toggle(type='button', data-toggle='dropdown')
+                  i.material-icons build
+                  span.caret
+                  .ripple-container
+                ul.dropdown-menu.dropdown-menu-right(role='menu')
+                  li
+                    a(href='#') View 
+                  li
+                    a(href='#') Edit
+                  li
+                    a.delete_student_btn() Delete

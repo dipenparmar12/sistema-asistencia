@@ -1,3 +1,7 @@
+import Teacher from '../entity/Teacher'
+import { getRepository } from 'typeorm'
+import * as fs from 'fs'
+import * as csv from 'fast-csv'
 import multer = require('multer')
 
 const upload = multer({
@@ -23,6 +27,32 @@ const upload = multer({
 	},
 }).array('profile_pic', 3)
 
-const fileRename = () => {}
+const getTeacherObject_from_array = async teacherInput => {
+	let teacher: Teacher = new Teacher()
+	teacher.username = teacherInput.username
+	teacher.password = teacherInput.password
+	teacher.name = teacherInput.name
+	teacher.subject = teacherInput.subject
+	teacher.email = teacherInput.email
+	teacher.mobile = teacherInput.mobile
+	teacher.address = teacherInput.address
+	teacher.roll = teacherInput.roll
+	return teacher
+	// let teacherRepository = getRepository(Teacher)
+	// await teacherRepository.save(teacher)
+	// console.log('Data inserted: ' + teacherInput.username)
+}
 
-export { upload }
+const get_csv_Promise = new Promise((resolve, reject) => {
+	let list: any = []
+	fs.createReadStream('./docs/teacher1.csv')
+		.pipe(csv.parse({ headers: true }))
+		.on('data', teacher => {
+			list.push(teacher)
+		})
+		.on('end', data => {
+			resolve(list)
+		})
+})
+
+export { upload, getTeacherObject_from_array, get_csv_Promise }

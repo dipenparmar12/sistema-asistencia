@@ -1,0 +1,12 @@
+entity: Teacher
+parameters: {}
+processor: ../dist/processor/TeacherProcessor
+items:
+  Teacher1:
+    firstName: '{{name.firstName}}'
+    lastName: '{{name.lastName}}'
+    email: '{{internet.email}}'
+    profile: '@profile1'
+    __call:
+      setPassword:
+        - admin

@@ -1,5 +1,6 @@
-import { EntityRepository } from 'typeorm'
+import { EntityRepository, ManyToOne, ManyToMany, JoinTable, TreeParent, TreeChildren } from 'typeorm'
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
+import Student from './Student'
 
 // ///// student_id, date_id, teacher_id, absent_present
 // //// Attendances Table
@@ -37,4 +38,8 @@ export default class Attendance {
 	@Column()
 	@UpdateDateColumn()
 	updatedAt: Date
+
+	@ManyToMany(type => Student)
+	@JoinTable()
+	students: Student[]
 }

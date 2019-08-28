@@ -7,7 +7,7 @@ import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 
-import { createConnection, Connection } from 'typeorm'
+import { createConnection, Connection, getRepository, Column } from 'typeorm'
 import Student from './entity/Student'
 import Attendance from './entity/Attendance'
 import Teacher from './entity/Teacher'
@@ -15,6 +15,10 @@ import Teacher from './entity/Teacher'
 import appRoutes from './routes/indexRoutes'
 import teacherRoutes from './routes/teacherRoutes'
 import studentRoutes from './routes/studentRoutes'
+import attendanceRoutes from './routes/attendanceRoutes'
+
+import * as utilController from './controllers/utilController'
+import teacherController from './controllers/teacherController'
 import authController from './controllers/authController'
 import { checkJwt, isLogged } from './middlewares/checkJwt'
 
@@ -27,11 +31,25 @@ class MyApplication {
 
 	constructor() {
 		this.appMiddlewares()
+		this.devRoutes()
 		this.appRoutes()
 		this.conn()
 		this._express.listen(this.port, () => {
 			console.log(process.env.APP_NAME + ', Started At:' + this.port)
 		})
+	}
+
+	public async insertFakeData() {
+		console.log(' test() Method')
+		let teachers: any = await utilController.get_csv_teacher_Promise.then()
+		createConnection()
+			.then(async connection => {
+				let teacherRepository = getRepository(Teacher)
+				teachers.forEach(teacher => {
+					teacherRepository.save(teacher)
+				})
+			})
+			.catch(error => console.log(error))
 	}
 
 	/**
@@ -51,22 +69,19 @@ class MyApplication {
 	 * Set All Application Routes from External Class's
 	 */
 	private appRoutes(): void {
-		// this._express.post(
-		// 	'/registration',
-		// 	this.mul().single('profile_pic'),
-		// 	(req: express.Request, res: express.Response) => {
-		// 		res.send('done')
-		// 	}
-		// )
 		this._express.post('/login', authController.loginAuth)
 		this._express.get('/logout', authController.logout)
 		this._express.get('/login', isLogged, authController.loginView)
 		this._express.use('/api/teachers', checkJwt, teacherRoutes)
 		this._express.use('/api/students', checkJwt, studentRoutes)
+		this._express.use(checkJwt, attendanceRoutes)
 		this._express.use(checkJwt, appRoutes)
 		this.errorRoutes()
 	}
 
+	/**
+	 * ERROR AND Undefined Routes
+	 */
 	private errorRoutes() {
 		////.... IF Request Route not Found.. THRO ERROR
 		this._express.use((req, res, next) => {
@@ -75,10 +90,6 @@ class MyApplication {
 		this._express.use((err, req, res, next) => {
 			res.status(500).send(err.stack)
 		})
-	}
-
-	public test(): string {
-		return ' testString(): '
 	}
 
 	/**
@@ -99,6 +110,18 @@ class MyApplication {
 		// const teachers = await tRepo.find();
 		// console.log(teachers);
 	}
+
+	/**
+	 * Only Dev Routes for Testing and Creating Record without Login etc
+	 */
+	public async devRoutes() {
+		if (process.env.NODE_ENV === 'dev') {
+			this._express.post('/api/teachers', teacherController.create)
+		}
+		// await getRepository('teacher').save([...itemList], { chunk: 500 })
+	}
 }
 
-export default new MyApplication()
+let app = new MyApplication()
+
+export default app

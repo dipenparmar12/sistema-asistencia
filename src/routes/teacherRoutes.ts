@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import teacherController from './../controllers/teacherController'
-import { checkRoll } from './../middlewares/checkRoll'
+import { isPrinciple } from './../middlewares/checkRoll'
 
 let router = Router()
 
 router
 	.get('/', teacherController.getAll)
 
-	.post('/', checkRoll, teacherController.create)
+	.post('/', isPrinciple, teacherController.create)
 	.get('/:id', teacherController.getOneById)
 	.patch('/:id', teacherController.update)
 	.delete('/:id', teacherController.destroy)

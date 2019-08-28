@@ -1,5 +1,7 @@
-import { EntityRepository } from 'typeorm'
+import { EntityRepository, OneToMany, JoinTable, ManyToOne } from 'typeorm'
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
+import Attendance from './Attendance'
+import Teacher from './Teacher'
 
 // ///// id, roll_no, enrollment_no, full_name, email, mobile, address, dob, profile_pic
 // //// Students Table
@@ -54,4 +56,10 @@ export default class Student {
 	@Column()
 	@UpdateDateColumn()
 	updatedAt: Date
+
+	@ManyToOne(type => Teacher)
+	teacher: Teacher
+
+	// @OneToMany(type => Attendance, attendance => attendance.student_id, { cascade: ['insert', 'update'] })
+	// attendances: Attendance[]
 }
