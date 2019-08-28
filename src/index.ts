@@ -37,7 +37,6 @@ class MyApplication {
 		this._express.listen(this.port, () => {
 			console.log(process.env.APP_NAME + ', Started At:' + this.port)
 		})
-		this.insertFakeData()
 	}
 
 	public async insertFakeData() {
@@ -51,20 +50,20 @@ class MyApplication {
 		let teacherRepository = getRepository(Teacher)
 		let studentRepository = getRepository(Student)
 
-		teachers.forEach( async teacher => {
+		teachers.forEach(async teacher => {
 			let t = await teacherRepository.save(teacher).catch(e => {
 				console.log(e)
 			})
 
 			students.forEach(async stud => {
 				stud.name = null
-				stud.enrollment_no = null 
-				stud.teacherid = null 
+				stud.enrollment_no = null
+				stud.teacherid = null
 
-				stud.name = 'A ' + Math.floor(Math.random() * (10000000 - 1) + 1)
+				stud.name = 'A-' + Math.floor(Math.random() * (10000000 - 1) + 1)
 				stud.enrollment_no = Math.floor(Math.random() * (10000000 - 1) + 1)
-				stud.teacherid = t.id
-				
+				stud.teacher = t
+
 				console.log(stud)
 				let s = await studentRepository.save(stud).catch(e => {
 					console.log(e)
@@ -72,32 +71,9 @@ class MyApplication {
 			})
 		})
 
-		// teachers.forEach(teacher => {
-		// console.log('User:' + teacher.username + ' inserted.')
-		// students.forEach(stud => {
-		// 	stud.teacher_id = teacher.id
-		// 	stud.name = stud.name +' '+ teacher.username
-		// 	studentRepository.create(stud)
-		// })
-		// })
-
 		// console.log(await teacherRepository.find())
 		// let test = await con.manager.find(Teacher)
 		// console.log(test)
-
-		// createConnection(/*...*/)
-		// 	.then(async connection => {
-		// let teacherRepository = getRepository(Teacher)
-		// let studentRepository = getRepository(Student)
-		// teachers.forEach(teacher => {
-		// 	teacherRepository.save(teacher)
-		// 	// students.forEach(stud => {
-		// 	// 	studentRepository.save(stud.username + teacher.username)
-		// 	// })
-		// 	console.log('User:' + teacher.username + ' inserted.')
-		// })
-		// 	})
-		// 	.catch(error => console.log(error))
 	}
 
 	/**
@@ -171,4 +147,5 @@ class MyApplication {
 }
 
 let app = new MyApplication()
+// app.insertFakeData()
 export default app

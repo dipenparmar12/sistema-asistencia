@@ -1,5 +1,5 @@
-import { EntityRepository, OneToMany, JoinTable, ManyToOne, Generated } from 'typeorm'
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
+import { EntityRepository, Entity, OneToMany, JoinTable, ManyToOne, Generated } from 'typeorm'
+import { Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
 import Attendance from './Attendance'
 import Teacher from './Teacher'
 import { IsUUID } from 'class-validator'
