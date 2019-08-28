@@ -75,13 +75,13 @@ class StudentController extends CrudController {
 
 			await databaseRepository.save(data)
 		} catch (e) {
-			res.status(401).render('student_registration', { errors: e })
+			res.status(401).render('registration', { errors: e })
 			// res.status(401).json({ status: 'fail', message: e.message, error: e, data: false })
 			return
 		}
 
 		//If all ok, send 201 response
-		res.status(201).redirect('/registration')
+		res.status(201).redirect('/attendance')
 		// res
 		// 	.status(201)
 		// 	.render('/student_registration', { status: 'success', message: 'Student c', error: false, data: null })
