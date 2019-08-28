@@ -3,10 +3,11 @@ import * as fs from 'fs'
 import * as csv from 'fast-csv'
 import multer = require('multer')
 
+////// Image Upload Method ( Student Registration POST METHOD )
 const upload = multer({
 	storage: multer.diskStorage({
 		destination: (req, file, cb) => {
-			cb(null, './uploads')
+			cb(null, './public/uploads')
 		},
 		/// store file with jwt_token + orignal_name
 		filename: (req, file, cb) => {
@@ -39,7 +40,8 @@ const get_teacherEntity_fromObject = async teacherObject => {
 	return teacher
 }
 
-const getCsvData = (csvFilePath: string = './src/fixtures/teachers.csv') => {
+const getCsvData = (csvFileName: string = 'teachers.csv') => {
+	let csvFilePath: string = './src/fixtures/' + csvFileName
 	return new Promise((resolve, reject) => {
 		let list: any = []
 		try {
@@ -56,4 +58,5 @@ const getCsvData = (csvFilePath: string = './src/fixtures/teachers.csv') => {
 		}
 	})
 }
+
 export { upload, get_teacherEntity_fromObject, getCsvData }

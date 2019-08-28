@@ -9,6 +9,9 @@ block append head
 block append variables
   - page_tab_title = "Take Attendance"
   - page_primary_heading = "Student List"
+  - 
+    console.log(students)
+
 
 //- Page Content 
 block content-fluid
@@ -37,16 +40,16 @@ block content-fluid
               a  Roll
             th.th-lg
               a  Actions
-
+        each stud,i in students
           tr(class='row_present')
-            td#present_absent_handler
+            td#present_absent_handler.d-none
               input.present_radio_btn(type='radio', name='a', value='', checked)
               input.absent_radio_btn(type='radio', name='a', value='',)
-            td.sr 1
+            td.sr=i+1
             td(width='10%')
-              img.img-responsive.rounded-circle(height='50', width='50' alt='img', src='/')
-            td(style='max-width:50px') DIPENDS
-            td rol
+              img.img-responsive.rounded-circle(height='50', width='50' alt='img', src='/uploads/'+stud.profile_pic)
+            td(style='max-width:50px')=stud.name
+            td=stud.roll_no
             td.td-actions.text-right
               .dropdown.pull-left
                 button.btn.btn-round.btn-info.dropdown-toggle(type='button', data-toggle='dropdown')

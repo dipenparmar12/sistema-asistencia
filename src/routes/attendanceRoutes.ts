@@ -1,24 +1,9 @@
 import { Router, Request, Response } from 'express'
 import attendanceController from '../controllers/attendanceController'
-import studentController from '../controllers/studentController'
-import * as util from './../controllers/utilController'
 
-import Attendance from '../entity/Attendance'
-import { getRepository } from 'typeorm'
-import Student from '../entity/Student'
+let route = Router()
+route.get('/test', attendanceController.test)
 
-let router = Router()
+route.get('/attendance', attendanceController.attendaceView)
 
-router.get('/attendance', (req: Request, res: Response) => {
-	// let students = studentController.getAll(req,res)
-	console.log(res.locals.id)
-	res.render('attendance')
-})
-
-router.get('/test', async (req: Request, res: Response) => {
-	const studentRepository = getRepository(Student)
-	const students = await studentRepository.find()
-	res.send(students)
-})
-
-export default router
+export default route

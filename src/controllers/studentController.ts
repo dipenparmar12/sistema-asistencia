@@ -136,6 +136,19 @@ class StudentController extends CrudController {
 		//After all send a 204 (no content, but accepted) response
 		res.status(204).send()
 	}
+
+	///////////////////////
+	///////////////
+	////////
+
+	getByTeacher = async (req: Request, res: Response) => {
+		//Get data from database
+		const databaseRepository = getRepository(Student)
+		const data = await databaseRepository.find({ teacher: res.locals.id })
+
+		//Send the data object
+		res.status(200).json({ status: 'success', message: 'Data Found', error: false, data: data })
+	}
 }
 
 export default new StudentController()

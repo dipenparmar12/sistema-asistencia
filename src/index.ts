@@ -42,8 +42,8 @@ class MyApplication {
 	public async insertFakeData() {
 		console.log(' insertFakeData() Method')
 
-		let teachers: any = await utilController.getCsvData('./src/fixtures/teachers.csv').then(data => data)
-		let students: any = await utilController.getCsvData('./src/fixtures/students.csv').then(data => data)
+		let teachers: any = await utilController.getCsvData('teachers.csv').then(data => data)
+		let students: any = await utilController.getCsvData('students.csv').then(data => data)
 		// console.log(teachers[1])
 
 		const con = getConnection()
@@ -72,8 +72,8 @@ class MyApplication {
 		})
 
 		// console.log(await teacherRepository.find())
-		// let test = await con.manager.find(Teacher)
-		// console.log(test)
+		// let myTeacher = await con.manager.find(Teacher)
+		// console.log(myTeacher)
 	}
 
 	/**

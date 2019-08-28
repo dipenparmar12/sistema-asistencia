@@ -1,6 +1,11 @@
 import { Router, Request, Response } from 'express'
 import { isPrinciple } from './../middlewares/checkRoll'
+
 let route = Router()
+
+route.get('/test', async (req: Request, res: Response) => {
+	res.send('test. INdex ROuts')
+})
 
 route.get('/', (req: Request, res: Response) => {
 	res.render('index')
