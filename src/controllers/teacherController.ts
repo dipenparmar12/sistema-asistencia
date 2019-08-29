@@ -66,6 +66,9 @@ class TeacherController extends CrudController {
 			return
 		}
 
+		// res.locals.success = 'Teacher Successfuly created. Thank you for using our service!'
+		// res.render('/index')
+
 		//If all ok, send 201 response
 		res.status(201).send('Teacher created')
 	}
