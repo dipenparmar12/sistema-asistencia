@@ -19,6 +19,10 @@ class AttendanceController {
 		return students
 	}
 
+	get_submit_Attendance = async (req: Request, res: Response, next?: NextFunction) => {
+		res.send(req.body)
+	}
+
 	test = async (req: Request, res: Response, next?: NextFunction) => {
 		res.send('test Attedance')
 		// res.send(students)
