@@ -1,4 +1,4 @@
-import { EntityRepository, ManyToOne, ManyToMany, JoinTable, TreeParent, TreeChildren } from 'typeorm'
+import { EntityRepository, ManyToOne, ManyToMany, JoinTable, TreeParent, TreeChildren, Generated } from 'typeorm'
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
 import Student from './Student'
 
@@ -19,13 +19,15 @@ export default class Attendance {
 	id: number
 
 	@Column()
-	student_id: number
+	@Generated('uuid')
+	student_id: string
 
 	@Column()
-	teacher_id: number
+	@Generated('uuid')
+	teacher_id: string
 
 	@Column({ nullable: true })
-	present: String
+	present: number
 
 	@Column()
 	@CreateDateColumn()
