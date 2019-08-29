@@ -29,8 +29,7 @@ export default class Attendance {
 	@Column({ nullable: true })
 	present: number
 
-	@Column()
-	@CreateDateColumn()
+	@Column('datetime')
 	date: Date
 
 	@Column()

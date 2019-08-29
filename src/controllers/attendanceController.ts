@@ -23,7 +23,6 @@ class AttendanceController {
 
 	get_submit_attendance = async (req: Request, res: Response, next?: NextFunction) => {
 		let submited_data = Object.getOwnPropertyNames(req.body)
-		const { date } = req.body
 
 		let attendanceEntities = submited_data.map((v, i) => {
 			let sid: string
@@ -32,13 +31,13 @@ class AttendanceController {
 				sid = v.slice('student_id='.length)
 				isPresent = req.body[v]
 
-				console.log(sid, isPresent, date, res.locals.id)
+				// console.log(sid, isPresent, date, res.locals.id)
 
 				let attendanceEntity = new Attendance()
 				attendanceEntity.student_id = sid
 				attendanceEntity.present = isPresent
 				attendanceEntity.teacher_id = res.locals.id
-				attendanceEntity.date = date
+				attendanceEntity.date = req.body['date']
 
 				if (attendanceEntity instanceof Attendance) return attendanceEntity
 				// return {
