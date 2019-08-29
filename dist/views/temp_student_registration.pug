@@ -1,0 +1,72 @@
+//-  Main_layout (Master Page)
+extends _layout
+
+//- Varialbes 
+block append variables
+  - page_title = 'Edit Student'
+  - page_tab_title = "Student Registration"
+  - student_edited = { id:null, name:'', email:'', address:'', mobile:'', enrollment_no:'', dob:'', roll_no:'', profile_pic:'' };
+  -
+    if(student){
+      student_edited = student
+      console.log(student_edited)
+    }else{
+      console.log("Not Available")
+    }
+
+
+//- Page Specific Assets 
+block append footer
+  script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js')
+
+//- Page Content 
+block content-fluid
+  .col-md-10.col-12
+    .card
+      .card-header.card-header-primary
+        h4.card-title Student
+        p.card-category Registration form
+      .card-body
+        form.form-group.form-file-upload.form-file-simple(enctype="multipart/form-data", id='student_registration_form', method="POST")
+          //- input.form-control(type='hidden', name='id' value='10' )
+            input.form-control(type='hidden', name='teacher_id' value=process.env.TEACHER_ID )
+          .row.mt-4
+            .col-md-6
+              .form-group.bmd-form-group
+                label.bmd-label-floating Full Name
+                //- input.form-control(type='hidden', name='id', value=student_edited.id )
+                input.form-control(type='text', name='name', value=student_edited.name )
+            .col-md-6
+              .form-group.bmd-form-group
+                label.bmd-label-floating Email address
+                input.form-control(type='email', name='email', value=student_edited.email )
+          .row.mt-3
+            .col-md-12
+              label Address
+              .form-group.bmd-form-group
+                label.bmd-label-floating  Enter Your Full address seprated by comma ( city, town, etc)
+                textarea.form-control(rows='3', name='address')=student_edited.address
+          .row.mt-3
+            .col-md-4
+              .form-group.bmd-form-group
+                label.bmd-label-floating mobile
+                input.form-control(type='number', name='mobile', min='2', student_edited.id )
+            .col-md-4
+              .form-group.bmd-form-group
+                label.bmd-label-floating enrollment_no
+                input.form-control(type='text', name='enrollment_no', student_edited.enrollment_no )
+            .col-md-4
+              .form-group.bmd-form-group
+                label.bmd-label-floating Birthdate
+                input.form-control(type='Date' name='dob',  student_edited.dob )
+          .row.mt-5
+            .col-3
+              .form-group.bmd-form-group
+                label.bmd-label-floating RollNo
+                input.form-control(type='number', name='roll_no', student_edited.roll_no )
+            .col-9
+              .custom-file
+                input#profile_pic.custom-file-input(type='file', name='profile_pic', accept="image/x-png,image/gif,image/jpeg", student_edited.profile_pic )
+                label.custom-file-label(for='profile_pic') ProfoliPic
+
+          button.btn.btn-primary.pull-right.mt-3(type='submit', id='student_registration_submit_btn') Submit form

@@ -8,11 +8,11 @@
 		"devs": "nodemon src/server.ts",
 		"devi": "nodemon src/index.ts",
 		"build": "tsc -p .",
-		"dev": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
-		"d": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+		"devd": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+		"dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
 		"prod": "tsc && node ./build/app.js",
-		"migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
-		"p": "parcel src/index.ts"
+		"postinstall": "tsc",
+		"start": "node dist/index.js"
 	},
 	"keywords": [
 		"nodejs",
@@ -48,5 +48,8 @@
 	"devDependencies": {
 		"fast-csv": "^3.4.0",
 		"nodemon": "^1.19.1"
+	},
+	"engines": {
+		"node": "10.5.0"
 	}
 }
