@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { getRepository } from 'typeorm'
 import Student from '../entity/Student'
-import * as utilController from './utilController'
 import Attendance from '../entity/Attendance'
-import { ArrayIterator } from 'lodash'
 
 class AttendanceController {
 	attendaceView = async (req: Request, res: Response, next: NextFunction) => {
@@ -57,8 +55,8 @@ class AttendanceController {
 			}
 		})
 
-		res.redirect('attendance')
-		// res.render('attendance', { message: 'Attendance Successfuly Submit.... Thank you for using our service' })
+		res.locals.success = 'Attendance Successfuly Submited.... Thank you for using our service'
+		this.attendaceView(req, res, next)
 	}
 
 	test = async (req: Request, res: Response, next?: NextFunction) => {

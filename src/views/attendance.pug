@@ -12,12 +12,21 @@ block append variables
   - 
     //- console.log(students)
 
+block messages 
+  .row
+    if (success)
+      .alert.alert-success.alert-dismissible
+        a.close(aria-label='close', href='#', data-dismiss='alert') ×
+        strong #{success}
+    if (errors)
+      .alert.alert-danger.alert-dismissible
+        a.close(aria-label='close', href='#', data-dismiss='alert') ×
+        strong #{errors}
 
 //- Page Content 
 block content-fluid
   .row
     h3 Attendance Dashboard
-
   form(action='/attendance',id='attendance_submit_form', method='POST')
     .row 
       h1 #{message}
