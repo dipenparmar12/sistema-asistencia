@@ -5,6 +5,8 @@ node_modules/
 build/
 tmp/
 temp/
+dist/
+dist/
 src/resource
 public/
 uploads/

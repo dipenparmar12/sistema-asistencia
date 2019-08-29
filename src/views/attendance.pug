@@ -43,12 +43,10 @@ block content-fluid
             th.th-lg
               a  Actions
         each stud,i in students
-          tr(class='row_present')
+          tr(class='row_present', onClick='myApp.attendance_togle_btn()' )
             td#present_absent_handler
-              div Pre
-                input.radio_btn(type='radio', name=stud.id, value='1', checked)
-              div Ab
-                input.radio_btn(type='radio', name=stud.id, value='0',)
+              input.radio_btn(type='radio', name=stud.id, value='1', checked)
+              input.radio_btn(type='radio', name=stud.id, value='0',)
             td.sr=i+1
             td(width='10%')
               img.img-responsive.rounded-circle(height='50', width='50' alt='img', src='/uploads/'+stud.profile_pic)

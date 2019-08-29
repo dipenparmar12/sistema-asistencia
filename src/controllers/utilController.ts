@@ -2,16 +2,15 @@ import Teacher from '../entity/Teacher'
 import * as fs from 'fs'
 import * as csv from 'fast-csv'
 import multer = require('multer')
-import { Request } from 'express-serve-static-core'
 
 ////// Image Upload Method ( Student Registration POST METHOD )
 const upload = multer({
 	storage: multer.diskStorage({
-		destination: (req: Request, file, cb) => {
+		destination: (req, file, cb) => {
 			cb(null, './public/uploads')
 		},
 		/// store file with jwt_token + orignal_name
-		filename: (req: Request, file, cb) => {
+		filename: (req, file, cb) => {
 			let filename_without_ext = file.originalname.split('.')[0]
 			// let file_extension = file_name_array[file_name_array.length - 1]
 			cb(null, req.cookies.jwt + '_' + filename_without_ext + '.jpg')

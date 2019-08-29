@@ -15,6 +15,7 @@ class AttendanceController {
 		const students = await studentRepository.find({
 			where: { teacher: res.locals.id },
 		})
+		console.log(students)
 		return students
 	}
 

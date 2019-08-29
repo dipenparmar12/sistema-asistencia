@@ -5,8 +5,7 @@ import { Request, Response, NextFunction } from 'express'
 export const isPrinciple = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		let jwtCookieToken = req.cookies.jwt
-		const JWT_TOKEN: string = process.env.JWT_TOKEN
-		let decoded_jwtCookieToken: any = await jwt.decode(jwtCookieToken)
+		let decoded_jwtCookieToken: any = await jwt.decode(jwtCookieToken, process.env.JWT_TOKEN)
 		if (decoded_jwtCookieToken.roll == 'principle') {
 			next()
 		} else {
