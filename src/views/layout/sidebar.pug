@@ -1,4 +1,5 @@
-.sidebar(data-image='/assets/img/sidebar-1.jpg', data-background-color='black', data-color='azure')
+
+.sidebar(data-image='/assets/img/sidebar-1.jpg', data-background-color=sidebar_bg_color, data-color='azure')
   //
     Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
     Tip 2: you can also add an image using data-image tag
@@ -13,7 +14,7 @@
         img(src='/images/student/img (3).jpg')
       .user-info
         a#username(href='#collapseExample', data-toggle='collapse')
-          span #{user_name}
+          span #{user_name} 
             b.caret
         #collapseExample.collapse
           ul.nav
@@ -24,7 +25,7 @@
             li.nav-item
               a.nav-link(href='/logout')
                 span.sidebar-mini  S 
-                span.sidebar-normal  Logout 
+                span.sidebar-normal  Logout
     ul.nav
       li.nav-item
         a.nav-link(href='/attendance')
@@ -37,7 +38,12 @@
       li.nav-item
         a.nav-link(href='/registration')
           i.material-icons face
-          p  Registration 
+          p  Add Student
+      if(roll == 'principle')
+        li.nav-item
+          a.nav-link(href='/teacher_registration')
+            i.material-icons face
+            p  Add Teacher  
       li.nav-item
         a.nav-link(href='#formsExamples', data-toggle='collapse')
           i.material-icons content_paste
