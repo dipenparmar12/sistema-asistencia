@@ -4,12 +4,34 @@ extends _layout
 block append head
   style.
     body: {background-color: #fff !important;}
+block append footer
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js', type='text/javascript')
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js', type='text/javascript')
+  //- script(src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js', type='text/javascript')
+  //- script(src='https://pivottable.js.org/dist/pivot.js', type='text/javascript')
+
+  //- JS Pivot Table Configration
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js')
+  script(src="/assets/js/plugins/pivot.js")
+  sciprt(src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js")
+  link(href='/assets/css/pivot.css', rel='stylesheet')
+
+  //- Date Range Picker Configration
+  link(href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', rel='stylesheet', type='text/css')
+  script(src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', type='text/javascript')
+  
+  
+
 
 //- Varialbes 
 block append variables
   - page_tab_title = "Welcome to sistema-asistencia "
   - page_primary_heading = "Home"
-
+  - 
+    console.log(data)
 //- Page Content 
 block content-fluid
   h1  DashBoard
+  .row
+    .div#attendance_dashboard
+  

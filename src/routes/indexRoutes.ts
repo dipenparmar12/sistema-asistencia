@@ -23,8 +23,4 @@ route.get('/index', (req: Request, res: Response) => {
 	res.render('index')
 })
 
-route.get('/dashboard', (req: Request, res: Response) => {
-	res.render('dashboard')
-})
-
 export default route
