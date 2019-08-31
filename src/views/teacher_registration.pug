@@ -1,50 +1,71 @@
 //-  Main_layout (Master Page)
 extends _layout
+
 //- Varialbes 
 block append variables
-  - page_tab_title = "TEACHER LOGIN (sistema-asistencia Nodejs)"
+  - page_title = 'Edit Student'
+  - page_tab_title = "Student Registration"
+
+//- Page Specific Assets 
+block append footer
+  script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js')
+  script.
+    $("input[name='teacher_id']").val(getCookie('teacher_id'))
+    
+
+block messages 
+  .row.ml-3
+    if (success)
+      .alert.alert-success.alert-dismissible
+        a.close(aria-label='close', href='#', data-dismiss='alert') ×
+        strong #{success}
+    if (errors)
+      .alert.alert-danger.alert-dismissible
+        a.close(aria-label='close', href='#', data-dismiss='alert') ×
+        strong #{errors}
+
 
 //- Page Content 
-block body
-  .container 
-    h3 Teacher Registaration
-    .card.col-12
-      .card-header.card-header-rose.card-header-text
-        .card-text
-          h4.card-title Registaration
+block content-fluid 
+  .col-md-10.col-12
+    .card
+      .card-header.card-header-primary
+        h4.card-title Teacher
+        p.card-category Registration form
       .card-body
+        br
         form.form-horizontal(action='/api/teachers/', method='POST')
           .row
-            label.col-sm-2.col-form-label Username
+            label.col-sm-1.col-form-label Username
             .col-sm-10
               .form-group.bmd-form-group
                 input.form-control(type='text', name='username',placeholder='for Login')
                 span.bmd-help A block of help text that breaks onto a new line.
           .row
-            label.col-sm-2.col-form-label Password
+            label.col-sm-1.col-form-label Password
             .col-sm-10
               .form-group.bmd-form-group
                 input.form-control(type='password', name='password', placeholder='Password must be strong')
           .row
-            label.col-sm-2.col-form-label Full Name
+            label.col-sm-1.col-form-label Full Name
             .col-sm-10
               .form-group.bmd-form-group
                 input.form-control(type='text',name='name' placeholder='Your Good Name')
           .row
-            label.col-sm-2.col-form-label Email
+            label.col-sm-1.col-form-label Email
             .col-sm-10
               .form-group.bmd-form-group
                 input.form-control(type='email', name='email', placeholder='your valid Email Address')
           .row
-            label.col-sm-2.col-form-label Subject
+            label.col-sm-1.col-form-label Subject
             .col-sm-10
               .form-group.bmd-form-group
                 input.form-control(type='text',name='subject' placeholder='Name of Subject')
           .row
-            label.col-sm-2.col-form-label Roll
+            label.col-sm-1.col-form-label Roll
             .col-sm-10
-            .form-group.bmd-form-group
-              input.form-control(type='text',name='roll' placeholder='Admin | principle | Teacher')
+              .form-group.bmd-form-group
+                input.form-control(type='text',name='roll' placeholder='Admin | principle | Teacher')
           .row
             .col-md-9
-              button.btn.btn-fill.btn-rose.pull-right(type='submit') Sign Up
+              button.btn.btn-fill.btn-rose.pull-right(type='submit') Create

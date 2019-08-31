@@ -70,7 +70,8 @@ class TeacherController extends CrudController {
 		// res.render('/index')
 
 		//If all ok, send 201 response
-		res.status(201).send('Teacher created')
+		res.locals.success = 'Teacher Successfuly created'
+		res.render('teacher_registration')
 	}
 
 	update = async (req: Request, res: Response) => {

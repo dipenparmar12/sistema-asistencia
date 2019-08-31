@@ -39,7 +39,7 @@ class AttendanceController {
 				attendanceEntity.student = await studentRepository.findOne(sid)
 
 				if (attendanceEntity instanceof Attendance && attendanceEntity != undefined) {
-					console.log(attendanceEntity)
+					// console.log(attendanceEntity)
 					await attendanceRepository.save(attendanceEntity).then(data => data)
 					return attendanceEntity
 				}

@@ -1,72 +1,50 @@
 //-  Main_layout (Master Page)
 extends _layout
-
 //- Varialbes 
 block append variables
-  - page_title = 'Edit Student'
-  - page_tab_title = "Student Registration"
-  - student_edited = { id:null, name:'', email:'', address:'', mobile:'', enrollment_no:'', dob:'', roll_no:'', profile_pic:'' };
-  -
-    if(student){
-      student_edited = student
-      console.log(student_edited)
-    }else{
-      console.log("Not Available")
-    }
-
-
-//- Page Specific Assets 
-block append footer
-  script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js')
+  - page_tab_title = "TEACHER LOGIN (sistema-asistencia Nodejs)"
 
 //- Page Content 
-block content-fluid
-  .col-md-10.col-12
-    .card
-      .card-header.card-header-primary
-        h4.card-title Student
-        p.card-category Registration form
+block body
+  .container 
+    h3 Teacher Registaration
+    .card.col-12
+      .card-header.card-header-rose.card-header-text
+        .card-text
+          h4.card-title Registaration
       .card-body
-        form.form-group.form-file-upload.form-file-simple(enctype="multipart/form-data", id='student_registration_form', method="POST")
-          //- input.form-control(type='hidden', name='id' value='10' )
-            input.form-control(type='hidden', name='teacher_id' value=process.env.TEACHER_ID )
-          .row.mt-4
-            .col-md-6
+        form.form-horizontal(action='/api/teachers/', method='POST')
+          .row
+            label.col-sm-2.col-form-label Username
+            .col-sm-10
               .form-group.bmd-form-group
-                label.bmd-label-floating Full Name
-                //- input.form-control(type='hidden', name='id', value=student_edited.id )
-                input.form-control(type='text', name='name', value=student_edited.name )
-            .col-md-6
+                input.form-control(type='text', name='username',placeholder='for Login')
+                span.bmd-help A block of help text that breaks onto a new line.
+          .row
+            label.col-sm-2.col-form-label Password
+            .col-sm-10
               .form-group.bmd-form-group
-                label.bmd-label-floating Email address
-                input.form-control(type='email', name='email', value=student_edited.email )
-          .row.mt-3
-            .col-md-12
-              label Address
+                input.form-control(type='password', name='password', placeholder='Password must be strong')
+          .row
+            label.col-sm-2.col-form-label Full Name
+            .col-sm-10
               .form-group.bmd-form-group
-                label.bmd-label-floating  Enter Your Full address seprated by comma ( city, town, etc)
-                textarea.form-control(rows='3', name='address')=student_edited.address
-          .row.mt-3
-            .col-md-4
+                input.form-control(type='text',name='name' placeholder='Your Good Name')
+          .row
+            label.col-sm-2.col-form-label Email
+            .col-sm-10
               .form-group.bmd-form-group
-                label.bmd-label-floating mobile
-                input.form-control(type='number', name='mobile', min='2', student_edited.id )
-            .col-md-4
+                input.form-control(type='email', name='email', placeholder='your valid Email Address')
+          .row
+            label.col-sm-2.col-form-label Subject
+            .col-sm-10
               .form-group.bmd-form-group
-                label.bmd-label-floating enrollment_no
-                input.form-control(type='text', name='enrollment_no', student_edited.enrollment_no )
-            .col-md-4
-              .form-group.bmd-form-group
-                label.bmd-label-floating Birthdate
-                input.form-control(type='Date' name='dob',  student_edited.dob )
-          .row.mt-5
-            .col-3
-              .form-group.bmd-form-group
-                label.bmd-label-floating RollNo
-                input.form-control(type='number', name='roll_no', student_edited.roll_no )
-            .col-9
-              .custom-file
-                input#profile_pic.custom-file-input(type='file', name='profile_pic', accept="image/x-png,image/gif,image/jpeg", student_edited.profile_pic )
-                label.custom-file-label(for='profile_pic') ProfoliPic
-
-          button.btn.btn-primary.pull-right.mt-3(type='submit', id='student_registration_submit_btn') Submit form
+                input.form-control(type='text',name='subject' placeholder='Name of Subject')
+          .row
+            label.col-sm-2.col-form-label Roll
+            .col-sm-10
+            .form-group.bmd-form-group
+              input.form-control(type='text',name='roll' placeholder='Admin | principle | Teacher')
+          .row
+            .col-md-9
+              button.btn.btn-fill.btn-rose.pull-right(type='submit') Sign Up
