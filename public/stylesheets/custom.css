@@ -1,0 +1,62 @@
+#student_list tbody {
+	cursor: pointer;
+	user-select: none;
+}
+
+.row_present {
+	color: #000;
+	border-left: 6px solid rgb(11, 252, 11) !important;
+	background-color: #c6fdd7 !important;
+}
+
+.row_absent {
+	color: #000;
+	border-left: 6px solid rgba(255, 22, 5, 0.877) !important;
+	background-color: #fdccc6ad !important;
+}
+
+.list-group-item {
+	width: auto;
+	margin: auto 13px;
+	border-bottom: 1px solid rgba(94, 94, 94, 0.692);
+	font-size: 17px;
+}
+
+#attendance_dashboard {
+	margin-top: 40px;
+}
+
+/* Pivot table cell color change  */
+tbody > tr > td.pvtVal[data-value],
+table.pvtTable tbody tr td[data-value='1'] {
+	text-align: center !important;
+	background-color: #09d9ff33 !important;
+}
+
+tbody > tr > td.pvtVal[data-value='null'],
+table.pvtTable tbody tr td[data-value='null'] {
+	text-align: center !important;
+	background-color: #ff05050a !important;
+}
+
+table.pvtTable tr:hover {
+	background-color: #3d3d3d0f !important;
+}
+
+/*  Easyest way to fix header and column of table  */
+th.pvtAxisLabel,
+.pvtColLabel {
+	margin-top: 10px;
+	padding-left: 10px;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0px;
+}
+
+tr th.pvtRowLabel {
+	padding: 20px;
+	flex-shrink: 0;
+	overflow: visible;
+	position: sticky;
+	left: 0px;
+}
