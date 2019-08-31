@@ -1,10 +1,6 @@
 roll_no,enrollment_no,name,subject,email,mobile,address,profile_pic,createdAt,updatedAt,teacherId
-14,123451,dipends,NULL,NULL,NULL,NULL,,12:37.2,13:10.0,cb60a4be-f425-4004-b0c6-f58e310a4a4f
 1,2,Dpn,NULL,dpn@gmai.com,1234,"Address is 
 Kutch",default.jpg,12:37.2,13:10.0,cb60a4be-f425-4004-b0c6-f58e310a4a4f
 2,3,Priyanka,NULL,p@gmai.com,123,"Address is 
 Rajkot ",default.jpg,12:37.2,13:10.0,cb60a4be-f425-4004-b0c6-f58e310a4a4f
 3,4,HITESH,NULL,h@gmail.com,789,Address is gandhidham,default.jpg,12:37.2,13:10.0,cb60a4be-f425-4004-b0c6-f58e310a4a4f
-4,5,Komu,NULL,Dhuli@gmail.com,123456,my Address is Rajkot (Batva),default.jpg,12:37.2,13:10.0,cb60a4be-f425-4004-b0c6-f58e310a4a4f
-5,6,Neo,NULL,Neo@gmai.com,12345,"Address is 
-Anjar",default.jpg,12:37.2,13:10.0,cb60a4be-f425-4004-b0c6-f58e310a4a4f

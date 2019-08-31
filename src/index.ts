@@ -16,6 +16,9 @@ import appRoutes from './routes/indexRoutes'
 import teacherRoutes from './routes/teacherRoutes'
 import studentRoutes from './routes/studentRoutes'
 import attendanceRoutes from './routes/attendanceRoutes'
+import dashboardRoutes from './routes/dashboardRoutes'
+
+import testRoutes from './routes/testRoutes'
 
 import * as utilController from './controllers/utilController'
 import teacherController from './controllers/teacherController'
@@ -39,7 +42,7 @@ class MyApplication {
 		})
 	}
 
-	public async insertFakeData() {
+	public async insertFakeData(isStudentInsert: boolean = true, studentCount: number = 3) {
 		console.log(' insertFakeData() Method')
 
 		let teachers: any = await utilController.getCsvData('teachers.csv').then(data => data)
@@ -55,20 +58,26 @@ class MyApplication {
 				console.log(e)
 			})
 
-			students.forEach(async stud => {
-				stud.name = null
-				stud.enrollment_no = null
-				stud.teacherid = null
+			if (isStudentInsert) {
+				let counter: number = 0
+				students.forEach(async stud => {
+					counter += 1
+					if (counter < studentCount) {
+						stud.name = null
+						stud.enrollment_no = null
+						stud.teacherid = null
 
-				stud.name = 'A-' + Math.floor(Math.random() * (10000000 - 1) + 1)
-				stud.enrollment_no = Math.floor(Math.random() * (10000000 - 1) + 1)
-				stud.teacher = t
+						stud.name = 'A-' + Math.floor(Math.random() * (10000000 - 1) + 1)
+						stud.enrollment_no = Math.floor(Math.random() * (10000000 - 1) + 1)
+						stud.teacher = t
 
-				console.log(stud)
-				let s = await studentRepository.save(stud).catch(e => {
-					console.log(e)
+						console.log(stud)
+						let s = await studentRepository.save(stud).catch(e => {
+							console.log(e)
+						})
+					}
 				})
-			})
+			}
 		})
 
 		// console.log(await teacherRepository.find())
@@ -96,9 +105,12 @@ class MyApplication {
 		this._express.post('/login', authController.loginAuth)
 		this._express.get('/logout', authController.logout)
 		this._express.get('/login', isLogged, authController.loginView)
+
+		this._express.use(testRoutes)
 		this._express.use('/api/teachers', checkJwt, teacherRoutes)
 		this._express.use('/api/students', checkJwt, studentRoutes)
 		this._express.use(checkJwt, attendanceRoutes)
+		this._express.use(checkJwt, dashboardRoutes)
 		this._express.use(checkJwt, appRoutes)
 		this.errorRoutes()
 	}
@@ -147,5 +159,6 @@ class MyApplication {
 }
 
 let app = new MyApplication()
-// app.insertFakeData()
+// app.insertFakeData(true, 3)
+
 export default app

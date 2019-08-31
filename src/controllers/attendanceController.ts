@@ -20,38 +20,29 @@ class AttendanceController {
 	}
 
 	get_submit_attendance = async (req: Request, res: Response, next?: NextFunction) => {
-		let submited_data = Object.getOwnPropertyNames(req.body)
+		let studentRepository = getRepository(Student)
+		let attendanceRepository = getRepository(Attendance)
 
-		let attendanceEntities = submited_data.map((v, i) => {
+		let submited_data = Object.getOwnPropertyNames(req.body)
+		let attendanceEntities = submited_data.map(async (v, i) => {
 			let sid: string
 			let isPresent: number
 			if (v.startsWith('student_id=')) {
 				sid = v.slice('student_id='.length)
 				isPresent = req.body[v]
 
-				// console.log(sid, isPresent, date, res.locals.id)
-
 				let attendanceEntity = new Attendance()
 				attendanceEntity.student_id = sid
 				attendanceEntity.present = isPresent
 				attendanceEntity.teacher_id = res.locals.id
 				attendanceEntity.date = req.body['date']
+				attendanceEntity.student = await studentRepository.findOne(sid)
 
-				if (attendanceEntity instanceof Attendance) return attendanceEntity
-				// return {
-				// 	student_id: sid,
-				// 	present: isPresent,
-				// 	teacher_id: res.locals.id,
-				// 	date,
-				// }
-			}
-		})
-
-		// console.log(attendanceEntities)
-		const attendanceRepository = getRepository(Attendance)
-		attendanceEntities.forEach(async attendanceEntity => {
-			if (attendanceEntity instanceof Attendance) {
-				await attendanceRepository.save(attendanceEntity)
+				if (attendanceEntity instanceof Attendance && attendanceEntity != undefined) {
+					console.log(attendanceEntity)
+					await attendanceRepository.save(attendanceEntity).then(data => data)
+					return attendanceEntity
+				}
 			}
 		})
 

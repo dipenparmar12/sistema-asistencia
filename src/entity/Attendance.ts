@@ -40,7 +40,6 @@ export default class Attendance {
 	@UpdateDateColumn()
 	updatedAt: Date
 
-	@ManyToMany(type => Student)
-	@JoinTable()
-	students: Student[]
+	@ManyToOne(type => Student, student => student.attendances)
+	student: Student
 }

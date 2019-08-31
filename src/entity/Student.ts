@@ -2,7 +2,6 @@ import { EntityRepository, Entity, OneToMany, JoinTable, ManyToOne, Generated } 
 import { Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
 import Attendance from './Attendance'
 import Teacher from './Teacher'
-import { IsUUID } from 'class-validator'
 
 // ///// id, roll_no, enrollment_no, full_name, email, mobile, address, dob, profile_pic
 // //// Students Table
@@ -65,6 +64,6 @@ export default class Student {
 	@ManyToOne(type => Teacher)
 	teacher: Teacher
 
-	// @OneToMany(type => Attendance, attendance => attendance.student_id, { cascade: ['insert', 'update'] })
-	// attendances: Attendance[]
+	@OneToMany(type => Attendance, attendance => attendance.student)
+	attendances: Attendance[]
 }
