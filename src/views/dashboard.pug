@@ -15,22 +15,22 @@ block append footer
   //- Date Range Picker Configration
   link(href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', rel='stylesheet', type='text/css')
   script(src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', type='text/javascript')
-  script.
-    $.getJSON('/getDashboardData', function (data, textStatus, jqXHR) {
-    // console.log(data)
-    //- console.log(myApp.flattenObject(data))
-    $('#attendance_dashboard').pivotUI(data, {
-      rows: ['student_id', 'id'],
-      cols: ['date'],
-      rendererName: 'Table',
-      // filter: (record) => {return record.present == 1},
-      // derivedAttributes:{
-      //   "teacher_id": function(mp) {
-      //       return mp["present"] == "1" ? 'PRESENTS' : 'AB';
-      //   }
-      // }
-    })
-  })
+  //- script.
+  //-   $.getJSON('/getDashboardData', function (data, textStatus, jqXHR) {
+  //-   // console.log(data)
+  //-   //- console.log(myApp.flattenObject(data))
+  //-   $('#attendance_dashboard').pivotUI(data, {
+  //-     rows: ['student_id', 'id'],
+  //-     cols: ['date'],
+  //-     rendererName: 'Table',
+  //-     // filter: (record) => {return record.present == 1},
+  //-     // derivedAttributes:{
+  //-     //   "teacher_id": function(mp) {
+  //-     //       return mp["present"] == "1" ? 'PRESENTS' : 'AB';
+  //-     //   }
+  //-     // }
+  //-   })
+  //- })
 
   
 

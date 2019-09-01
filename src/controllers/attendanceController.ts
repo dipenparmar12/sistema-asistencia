@@ -50,9 +50,15 @@ class AttendanceController {
 		this.attendaceView(req, res, next)
 	}
 
+	face = async (req: Request, res: Response, next?: NextFunction) => {
+		const students = await this.getStudentJson(req, res)
+		res.render('face',{ students })
+	}
+
 	test = async (req: Request, res: Response, next?: NextFunction) => {
 		res.send('test Attedance')
 	}
+	
 }
 
 export default new AttendanceController()

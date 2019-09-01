@@ -80,6 +80,10 @@ myApp = {
 							'Your file has been deleted.',
 							'success'
 						)
+						// Remove row from table of clicked Student
+						$(`[data-student_id=${student_id}]`)
+							.parents('tr')
+							.fadeOut('fast')
 					},
 					error: (e) => {
 						console.log('ERROR', e);
