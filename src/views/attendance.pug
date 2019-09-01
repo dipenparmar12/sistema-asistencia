@@ -74,7 +74,7 @@ block content-fluid
                       li
                         a(href='#') Edit
                       li
-                        a.delete_student_btn() Delete
+                        a.delete_student_btn(href='#', onClick='myApp.delete_student(this)', name='id', data-student_id=stud.id ) Delete
             td
               button.btn.btn-success(type='button', id='attendance_conform_btn', data-target='#attendance_submit_model', data-toggle='modal') Submit
 

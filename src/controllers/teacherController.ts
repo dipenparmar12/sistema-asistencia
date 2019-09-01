@@ -65,7 +65,6 @@ class TeacherController extends CrudController {
 			res.status(200).json({ status: 'fail', message: e.message, error: e, data: false })
 			return
 		}
-
 		// res.locals.success = 'Teacher Successfuly created. Thank you for using our service!'
 		// res.render('/index')
 
