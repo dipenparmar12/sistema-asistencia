@@ -68,6 +68,7 @@ class StudentController extends CrudController {
     data.subject = subject;
     data.mobile = mobile;
     data.address = address;
+    data.profile_pic = 'default.jpg'
     // data.teacher = teacherId
 
     /// filename that stored with same_name
@@ -77,7 +78,7 @@ class StudentController extends CrudController {
       // req.files[0].originalname.split('.')[0] + '.jpg';
       let images = utilController.getFilesFromPath('./public/uploads/' + enrollment_no)
       if (images.length > 0) {
-        data.profile_pic = images[0]
+        data.profile_pic = enrollment_no + '/' + images[0]
       }
     }
 
