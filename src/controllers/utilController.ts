@@ -18,7 +18,14 @@ const upload = multer({
 
     /// store file with jwt_token + orignal_name
     filename: (req: Request, file, cb) => {
-      cb(null, req.body.name + Date.now() + '.jpg');
+      cb(null, '1.jpg');
+
+      // if (fs.existsSync(req.body.enrollment_no + '/1.jpg')) {
+      //   cb(null, '2.jpg');
+      // } else {
+      //   cb(null, '1.jpg');
+      // }
+
       // let filename_without_ext = file.originalname.split('.')[0];
       // // let file_extension = file_name_array[file_name_array.length - 1]
       // cb(null, req.cookies.jwt + '_' + filename_without_ext + '.jpg');
@@ -37,7 +44,7 @@ const upload = multer({
       return cb(new Error('Only .png, .jpg and .jpeg format allowed!'), null);
     }
   }
-}).array('profile_pic', 3);
+}).array('profile_pic', 5);
 
 const get_teacherEntity_fromObject = async teacherObject => {
   let teacher: Teacher = new Teacher();

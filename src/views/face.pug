@@ -12,77 +12,18 @@ block append variables
   - 
     //- console.log(students)
 
+block append footer
+  // Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard
+  script(src='/assets/js/plugins/face-api.min.js')
+  script.
+    let students = JSON.parse('!{JSON.stringify(students)}')
+    console.log(students)
+  script(src='/assets/js/plugins/faceLogic.js')
+
+
 //- Page Content 
 block content-fluid
   .ml-4
     .row
-      h3 Attendance Dashboard
-    form(action='/attendance',id='attendance_submit_form', method='POST')
-      .row 
-        h1 #{message}
-      .row  
-        a.btn.btn-info(href='/registration' id='register_student_btn') Add Student           
-        a.btn.btn-info(id='a_img',onClick='myApp.a_img(this)') IMG
-      .row
-          // Table.
-          table#student_list.table.table-fixed
-            // Table head
-            thead
-              tr
-                th.th-lg(width='2%')
-                  a  Temp
-                th.th-lg(width='4%')
-                  a  Sr
-                th.th-lg
-                  a  img 
-                th.th-lg
-                  a  Full Name 
-                th.th-lg
-                  a  Roll
-                th.th-lg
-                  a  Actions
-            each stud,i in students
-              tr(class='row_present')
-                td#present_absent_handler
-                  input.radio_btn(type='radio', name='student_id='+ stud.id, value='1', checked)
-                  input.radio_btn(type='radio', name='student_id='+ stud.id, value='0',)
-                td.sr=i+1
-                td(width='10%')
-                  img.img-responsive.rounded-circle(height='50', width='50' alt='img', src='/uploads/'+stud.profile_pic)
-                td.stud_name(style='max-width:50px')=stud.name
-                td=stud.roll_no
-                td.td-actions.text-right
-                  .dropdown.pull-left
-                    button.btn.btn-round.btn-info.dropdown-toggle(type='button', data-toggle='dropdown')
-                      i.material-icons build
-                      span.caret
-                      .ripple-container
-                    ul.dropdown-menu.dropdown-menu-right(role='menu')
-                      li
-                        a(href='#') View 
-                      li
-                        a(href='#') Edit
-                      li
-                        a.delete_student_btn(href='#', onClick='myApp.delete_student(this)', name='id', data-student_id=stud.id ) Delete
-            td
-              button.btn.btn-success(type='button', id='attendance_conform_btn', data-target='#attendance_submit_model', data-toggle='modal') Submit
-
-
-      // Modal
-      #attendance_submit_model.modal.fade(tabindex='-1', role='dialog', aria-hidden='true', aria-labelledby='attendance_submit_modelLabel')
-        .modal-dialog(role='document')
-          .modal-content
-            .modal-header
-            .card
-              .card-header.card-header-info
-                h4.card-title Present Students
-                p.card-category Please select Date for Attendance?
-                  input#date_picker_btn.btn.btn-sm.btn-secondary(style='width:170px; margin-left:25px', type='date', name='date', placeholder="Date", required)
-            .modal-body
-              ul#presents_conform_list_table.list-group
-
-
-            .modal-footer
-              button.btn.btn-secondary(type='button', data-dismiss='modal') Cencel
-              button.btn.btn-success.pull-right(id='attendance_submit_btn', type='submit') Conform
-                .ripple-container
+    input(type="file", name='imageUpload', id='imageUpload')
+    div#myImage(style='height:100px; color:"blue"') ok
