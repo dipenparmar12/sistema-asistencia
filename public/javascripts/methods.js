@@ -108,3 +108,6 @@ myApp = {
 
 myApp.attendance_togle_btn()
 myApp.getPresent_student_list()
+
+
+$(() => { hideLoader() });
