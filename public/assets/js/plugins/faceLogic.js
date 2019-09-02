@@ -65,10 +65,15 @@ async function processImage(faceMatcher) {
     $(`td[data-enrollment_no="${result._label}"]`).trigger('click')
 
     drawBox.draw(canvas)
+
+    //// Show Attendance Table with
+    $('#attendance_table').removeClass('d-none')
   })
 
+  //// Remove Image Uploader (so use can reload page)
   $("#imageUpload").remove()
-  $('#attendance_table').removeClass('d-none')
+  /// Show Conform Button
+  $('#attendance_conform_btn').trigger('click')
   hideLoader()
 }
 
