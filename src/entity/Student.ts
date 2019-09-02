@@ -28,7 +28,7 @@ export default class Student {
 	@Column()
 	roll_no: number
 
-	@Column()
+	@Column({ nullable: true })
 	enrollment_no: number
 
 	@Column()
@@ -61,9 +61,9 @@ export default class Student {
 	@UpdateDateColumn()
 	updatedAt: Date
 
-	@ManyToOne(type => Teacher)
+	@ManyToOne(type => Teacher, { onDelete: "SET NULL" })
 	teacher: Teacher
 
-	@OneToMany(type => Attendance, attendance => attendance.student)
+	@OneToMany(type => Attendance, attendance => attendance.student, { onDelete: "SET NULL" })
 	attendances: Attendance[]
 }
