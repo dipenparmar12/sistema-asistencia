@@ -1,33 +1,26 @@
 
 
 
-// $(document).ready(function () {
-
-Promise.all([
-  faceapi.nets.faceRecognitionNet.loadFromUri('/assets/js/models'),
-  faceapi.nets.faceLandmark68Net.loadFromUri('/assets/js/models'),
-  faceapi.nets.ssdMobilenetv1.loadFromUri('/assets/js/models')
-]).then(start)
-
-// });
+$(document).ready(function () {
+  showLoader()
+  Promise.all([
+    faceapi.nets.faceRecognitionNet.loadFromUri('/assets/js/models'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('/assets/js/models'),
+    faceapi.nets.ssdMobilenetv1.loadFromUri('/assets/js/models')
+  ]).then(start)
+  hideLoader()
+});
 
 
 async function start() {
 
-  showLoader()
-  // const container = document.createElement('div')
-  // const container = document.getElementById('box')
-  // container.style.position = 'relative'
-  // document.body.appendChild(container)
-
   const labeledFaceDescriptors = await loadLabeledImages()
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.7)
-  document.getElementById('imageUpload').addEventListener('change', await processImage(faceMatcher))
-
+  document.getElementById('imageUpload').addEventListener('change', async () => {
+    showLoader()
+    await processImage(faceMatcher)
+  })
 }
-
-
-
 
 
 async function processImage(faceMatcher) {
@@ -67,13 +60,18 @@ async function processImage(faceMatcher) {
       label: result.toString()
     })
     console.log(result._label)
+
+    //// Make Present Row
+    $(`td[data-enrollment_no="${result._label}"]`).trigger('click')
+
     drawBox.draw(canvas)
   })
 
   $("#imageUpload").remove()
-  // $('#attendance_table').removeClass('d-none')
+  $('#attendance_table').removeClass('d-none')
   hideLoader()
 }
+
 
 
 

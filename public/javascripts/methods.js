@@ -9,7 +9,7 @@ myApp = {
 	},
 
 	attendance_togle_btn: () => {
-		$('.row_present').click(function (e) {
+		$('.row_present_absent').click(function (e) {
 			///// Color Of Row ( Green/Red )
 			$(this).toggleClass('row_present')
 			$(this).toggleClass('row_absent')

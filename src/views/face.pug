@@ -17,28 +17,23 @@ block append footer
   script(src='/assets/js/plugins/face-api.min.js')
   script.
     let students = JSON.parse('!{JSON.stringify(students)}')
-    //- console.log(students)
+
   script(src='/assets/js/plugins/faceLogic.js')
   
     
 
 //- Page Content 
 block content-fluid
-
-  .ml-4
+  .row
+    .ml-4
+      .row
+        input(type='file', id='imageUpload', name='imageUpload', accept="image/*")
+      div#box(style='max-height:450px; position: relative; margin-top:30px; margin-bottom:10px')
+    
+  .ml-4#attendance_table(style='margin-top:480px')
     .row
-      input(type='file', id='imageUpload', name='imageUpload', accept="image/*")
-    div#box(style='max-height:300px; position: relative; margin-top:30px')
-  
-  .ml-4#attendance_table.d-none
-    .row
-      h3 Attendance Dashboard
+      h4 Make sure is it Right
     form(action='/attendance',id='attendance_submit_form', method='POST')
-      .row 
-        h1 #{message}
-      .row  
-        a.btn.btn-info(href='/registration' id='register_student_btn') Add Student           
-        a.btn.btn-info() Absent all
       .row
           // Table.
           table#student_list.table.table-fixed
@@ -58,15 +53,15 @@ block content-fluid
                 th.th-lg
                   a  Actions
             each stud,i in students
-              tr(class='row_present')
+              tr(class='row_present_absent row_absent')
                 td#present_absent_handler
-                  input.radio_btn(type='radio', name='student_id='+ stud.id, value='1', checked)
-                  input.radio_btn(type='radio', name='student_id='+ stud.id, value='0',)
+                  input.radio_btn(type='radio', name='student_id='+ stud.id, value='1', )
+                  input.radio_btn(type='radio', name='student_id='+ stud.id, value='0',checked)
                 td.sr=i+1
                 td(width='10%')
                   img.img-responsive.rounded-circle(height='50', width='50' alt='img', src='/uploads/'+stud.profile_pic)
                 td.stud_name(style='max-width:50px')=stud.name
-                td=stud.roll_no
+                td(data-enrollment_no = stud.enrollment_no)=stud.roll_no
                 td.td-actions.text-right
                   .dropdown.pull-left
                     button.btn.btn-round.btn-info.dropdown-toggle(type='button', data-toggle='dropdown')
