@@ -17,8 +17,9 @@ block append footer
   script(src='/assets/js/plugins/face-api.min.js')
   script.
     let students = JSON.parse('!{JSON.stringify(students)}')
-    console.log(students)
+    //- console.log(students)
   script(src='/assets/js/plugins/faceLogic.js')
+  
 
 
 //- Page Content 
@@ -26,4 +27,5 @@ block content-fluid
   .ml-4
     .row
     input(type="file", name='imageUpload', id='imageUpload')
-    div#myImage(style='height:100px; color:"blue"') ok
+    div#box(style='max-height:100px; position: relative;')
+    

@@ -1,32 +1,46 @@
 const imageUpload = document.getElementById('imageUpload')
 
 
+// $(document).ready(function () {
+
 Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('/assets/js/models'),
   faceapi.nets.faceLandmark68Net.loadFromUri('/assets/js/models'),
   faceapi.nets.ssdMobilenetv1.loadFromUri('/assets/js/models')
 ]).then(start)
 
+// });
+
 
 async function start() {
-  const container = document.getElementById('myImage')
+  // const container = document.createElement('div')
+  const container = document.getElementById('box')
   container.style.position = 'relative'
-  // container.style.height = '500px'
-  // container.style.width = '500px'
-  // document.body.append(container)
+  // document.body.appendChild(container)
 
   const labeledFaceDescriptors = await loadLabeledImages()
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.7)
   let image
   let canvas
-  document.body.append('Loaded')
+  // document.body.appendChild('Loaded')
+
   imageUpload.addEventListener('change', async () => {
     if (image) image.remove()
     if (canvas) canvas.remove()
     image = await faceapi.bufferToImage(imageUpload.files[0])
-    container.append(image)
+
+
+    //// Main Uploaded Image
+    image.setAttribute("height", "400")
+    image.setAttribute("width", "400")
+    image.setAttribute("style", "position:absolute;")
+    container.appendChild(image)
+
+    //// Canvas Face LandMarked
     canvas = faceapi.createCanvasFromMedia(image)
-    container.append(canvas)
+    canvas.setAttribute("style", "position:absolute;")
+    container.appendChild(canvas)
+
     const displaySize = { width: image.width, height: image.height }
     faceapi.matchDimensions(canvas, displaySize)
     const detections = await faceapi
