@@ -22,7 +22,7 @@ block content-fluid
         h1 #{message}
       .row  
         a.btn.btn-info(href='/registration' id='register_student_btn') Add Student           
-        a.btn.btn-info() Absent all
+        a.btn.btn-info(id='a_img',onClick='myApp.a_img(this)') IMG
       .row
           // Table.
           table#student_list.table.table-fixed

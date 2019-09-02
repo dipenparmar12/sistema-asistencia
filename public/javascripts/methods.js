@@ -99,6 +99,10 @@ myApp = {
 		})
 
 
+	},
+
+	a_img: (self) => {
+		console.log(self);
 	}
 }
 

@@ -137,13 +137,14 @@ class StudentController extends CrudController {
 		let data: Student
 		try {
 			data = await databaseRepository.findOneOrFail(id)
+			
+			/// Detele Entry From Table (Hard_Delete)
+			databaseRepository.delete(id)
 		} catch (error) {
 			res.status(404).json({ status: 'fail', message: 'Data  not found', data: false,error})
 			return
 		}
 
-		/// Detele Entry From Table (Hard_Delete)
-		databaseRepository.delete(id)
 
 		//After all send a 204 (no content, but accepted) response
 		res.status(201).json({ status: 'success', message: 'Data Deleted Succesfuly', data: false })
