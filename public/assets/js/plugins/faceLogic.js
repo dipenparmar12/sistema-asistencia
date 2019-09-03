@@ -71,11 +71,12 @@ async function processImage(faceMatcher) {
   })
 
   //// Remove Image Uploader (so use can reload page)
-  $("#imageUpload").remove()
+  // $("#imageUpload").remove()
   /// Show Conform Button
   $('#attendance_conform_btn').trigger('click')
   hideLoader()
 }
+
 
 
 
@@ -89,6 +90,8 @@ function loadLabeledImages() {
         const img = await faceapi.fetchImage(
           `/uploads/${label}/${i}.jpg`
         )
+        // console.log(img);
+
         const detections = await faceapi
           .detectSingleFace(img)
           .withFaceLandmarks()

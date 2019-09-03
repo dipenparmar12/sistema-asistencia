@@ -17,3 +17,22 @@ class TestController {
 }
 
 export default new TestController()
+
+
+
+// export let age: number = 20;
+// export class Emp {
+// 	eCode: number;
+// 	eName: string;
+
+// 	constructor(name: string, code: number) {
+// 		this.eName = name
+// 		this.eCode = eCode;
+// 	}
+
+// 	print() {
+// 		console.log(`E code: ${this.eCode} E Name: ${this.eName}`)
+// 	}
+// }
+
+// let Ename = New Emp(1, 'Dipends')
