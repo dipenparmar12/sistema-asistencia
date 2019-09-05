@@ -28,6 +28,10 @@ block content-fluid
     .ml-4
       .row
         input(type='file', id='imageUpload', name='imageUpload', accept="image/*")
+      hr
+      .row
+        lable Accuracy
+        input(type='number', id='accuracy', name='accuracy', min=1,max=10, value=6)
       div#box(style='max-height:450px; position: relative; margin-top:30px; margin-bottom:10px')
     
   .ml-4#attendance_table(style='margin-top:480px')
