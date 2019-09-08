@@ -1,6 +1,21 @@
-import { EntityRepository, ManyToOne, ManyToMany, JoinTable, TreeParent, TreeChildren, Generated } from 'typeorm'
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm'
-import Student from './Student'
+import {
+  EntityRepository,
+  ManyToOne,
+  ManyToMany,
+  JoinTable,
+  TreeParent,
+  TreeChildren,
+  Generated
+} from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  Unique
+} from 'typeorm';
+import Student from './Student';
 
 // ///// student_id, date_id, teacher_id, absent_present
 // //// Attendances Table
@@ -15,31 +30,35 @@ import Student from './Student'
 @EntityRepository()
 @Entity()
 export default class Attendance {
-	@PrimaryGeneratedColumn('uuid')
-	id: number
+  @PrimaryGeneratedColumn('uuid')
+  id: number;
 
-	@Column()
-	@Generated('uuid')
-	student_id: string
+  @Column()
+  @Generated('uuid')
+  student_id: string;
 
-	@Column()
-	@Generated('uuid')
-	teacher_id: string
+  @Column()
+  @Generated('uuid')
+  teacher_id: string;
 
-	@Column({ nullable: true })
-	present: number
+  @Column({ nullable: true })
+  present: number;
 
-	@Column('datetime')
-	date: Date
+  @Column('date')
+  date: Date;
 
-	@Column()
-	@CreateDateColumn()
-	createdAt: Date
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
 
-	@Column()
-	@UpdateDateColumn()
-	updatedAt: Date
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-	@ManyToOne(type => Student, student => student.attendances, { eager: true, nullable: true, onDelete: 'SET NULL' })
-	student: Student
+  @ManyToOne(type => Student, student => student.attendances, {
+    eager: true,
+    nullable: true,
+    onDelete: 'SET NULL'
+  })
+  student: Student;
 }

@@ -18,7 +18,10 @@ class DashboadController {
     next: NextFunction
   ) => {
     let attendanceRepository = getRepository(Attendance);
-    let data = await attendanceRepository.find({ relations: ['student'] });
+    let data = await attendanceRepository.find({
+      relations: ['student'],
+      where: { teacher_id: res.locals.id }
+    });
     res.send(data);
     // res.send(students)
   };

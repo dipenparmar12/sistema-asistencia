@@ -1,19 +1,18 @@
 $.getJSON('/getDashboardData', function(data, textStatus, jqXHR) {
-  flattenObject(data);
-  // data = flattenObject(data);
-  makePivot('#attendance_dashboard', data);
+  let pivotData = data.map((v, k) => flattenObject(v));
+  makePivot('#attendance_dashboard', pivotData);
 });
 
 function makePivot(selector, data, uiType = 'pivot') {
   $(selector).pivotUI(data, {
-    rows: ['student_id'],
-    cols: ['date', 'present'],
+    rows: ['student.name'],
+    cols: ['date', 'absent_present'],
     rendererName: 'Table',
     // filter: record => {
     //   return record.present == 1;
     // },
     derivedAttributes: {
-      P: function(mp) {
+      absent_present: function(mp) {
         return mp['present'] == '1' ? 'Present' : 'Absent';
       },
       test: function(mp) {
@@ -37,8 +36,6 @@ function flattenObject(data) {
       toReturn[i] = data[i];
     }
   }
-
-  console.log(toReturn);
 
   return toReturn;
 
