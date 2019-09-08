@@ -4,8 +4,10 @@ extends _layout
 block append head
   style.
     body: {background-color: #fff !important;}
-block append footer
 
+
+//- Page Specific Assets 
+block append footer
   //- JS Pivot Table Configration
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js')
   script(src="/assets/js/plugins/pivot.js")
@@ -15,32 +17,16 @@ block append footer
   //- Date Range Picker Configration
   link(href='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', rel='stylesheet', type='text/css')
   script(src='https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', type='text/javascript')
-  //- script.
-  //-   $.getJSON('/getDashboardData', function (data, textStatus, jqXHR) {
-  //-   // console.log(data)
-  //-   //- console.log(myApp.flattenObject(data))
-  //-   $('#attendance_dashboard').pivotUI(data, {
-  //-     rows: ['student_id', 'id'],
-  //-     cols: ['date'],
-  //-     rendererName: 'Table',
-  //-     // filter: (record) => {return record.present == 1},
-  //-     // derivedAttributes:{
-  //-     //   "teacher_id": function(mp) {
-  //-     //       return mp["present"] == "1" ? 'PRESENTS' : 'AB';
-  //-     //   }
-  //-     // }
-  //-   })
-  //- })
-
-  
-
+  script(src='/assets/js/dashboard.js', type='text/javascript')
 
 //- Varialbes 
 block append variables
   - page_tab_title = "Welcome to sistema-asistencia "
   - page_primary_heading = "Home"
   - 
-    console.log(data)
+
+
+
 //- Page Content 
 block content-fluid
   h1  DashBoard

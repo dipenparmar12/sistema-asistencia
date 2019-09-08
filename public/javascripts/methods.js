@@ -4,9 +4,9 @@ myApp = {
   test: () => {
     alert('testing Func');
   },
-  student_registration: formdata => {
-    console.log(formdata);
-  },
+  // student_registration: formdata => {
+  //   console.log(formdata);
+  // },
 
   attendance_togle_btn: () => {
     $('.row_present_absent').click(function(e) {

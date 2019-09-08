@@ -69,7 +69,7 @@ class MyApplication {
 
     teachers.forEach(async teacher => {
       let t = await teacherRepository.save(teacher).catch(e => {
-        console.log(e);
+        // console.log(e);
       });
 
       if (isStudentInsert) {
@@ -85,7 +85,7 @@ class MyApplication {
             stud.enrollment_no = Math.floor(Math.random() * (10000000 - 1) + 1);
             stud.teacher = t;
 
-            console.log(stud);
+            // console.log(stud);
             let s = await studentRepository.save(stud).catch(e => {
               console.log(e);
             });

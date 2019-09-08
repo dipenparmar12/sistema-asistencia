@@ -11,7 +11,31 @@ block append footer
   script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js')
   script.
     $("input[name='teacher_id']").val(getCookie('teacher_id'))
+    jQuery.validator.setDefaults({
+      debug: true,
+      success: "valid"
+    });
+    $( "#teacher_registration_form" ).validate({
+      rules: {
+        'username':{
+          required: true
+        },
+        'password':{
+          required: true
+        },
+        'name': {
+          required: true
+        },
+        'roll': {
+          required: true,
+        },
+        'email': {
+          email: true
+        }
+      }
+    });
     
+
 
 block messages 
   .row.ml-3
@@ -34,7 +58,7 @@ block content-fluid
         p.card-category Registration form
       .card-body
         br
-        form.form-horizontal(action='/api/teachers/', method='POST')
+        form.form-horizontal(action='/api/teachers/', method='POST', id='teacher_registration_form')
           .row
             label.col-sm-1.col-form-label Username
             .col-sm-10
