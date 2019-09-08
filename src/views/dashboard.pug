@@ -29,7 +29,12 @@ block append variables
 
 //- Page Content 
 block content-fluid
-  h1  DashBoard
+  .row
+    h1 DashBoard
+  .row          
+    button.btn.btn-info(id='make_static_pivot') Static
+    button.btn.btn-info(id='make_dynamic_pivot') Dynamic
+  
   .row
     .div#attendance_dashboard
   
