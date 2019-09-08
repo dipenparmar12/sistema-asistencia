@@ -68,7 +68,7 @@ export default class Teacher {
 	@UpdateDateColumn()
 	updatedAt: Date
 
-	@OneToMany(type => Student, student => student.teacher)
+	@OneToMany(type => Student, student => student.teacher, { onDelete: "SET NULL" })
 	students: Student[]
 
 	// @JoinTable()

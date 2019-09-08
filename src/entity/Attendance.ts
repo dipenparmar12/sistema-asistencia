@@ -40,6 +40,6 @@ export default class Attendance {
 	@UpdateDateColumn()
 	updatedAt: Date
 
-	@ManyToOne(type => Student, student => student.attendances)
+	@ManyToOne(type => Student, student => student.attendances, { eager: true, nullable: true, onDelete: 'SET NULL' })
 	student: Student
 }
