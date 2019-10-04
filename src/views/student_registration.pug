@@ -11,10 +11,10 @@ block append footer
   script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js')
   script.
     $("input[name='teacher_id']").val(getCookie('teacher_id'))
-    jQuery.validator.setDefaults({
-      debug: true,
-      success: "valid"
-    });
+    //- jQuery.validator.setDefaults({
+    //-   debug: true,
+    //-   success: "valid"
+    //- });
     $( "#student_registration_form" ).validate({
       rules: {
         'name': {
@@ -35,7 +35,19 @@ block append footer
         }
       }
     });
-    
+    function Checkfiles()
+    {
+      var fup = document.getElementById('profile_pic');
+      var fileName = fup.value;
+      var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+      if(ext == "png" || ext == "GIF" || ext == "JPEG" || ext == "jpeg" || ext == "jpg" || ext == "JPG" || ext == "doc") {
+        return true;
+      } else {
+        alert("Upload Gif or Jpg images only");
+        fup.focus();
+        return false;
+      }
+    }
 
 //- Page Content 
 block content-fluid 
@@ -51,38 +63,37 @@ block content-fluid
             .col-md-6
               .form-group.bmd-form-group
                 label.bmd-label-floating Full Name
-                input.form-control(type='text', name='name', required)
+                input.form-control(type='text', name='name', value='t', required)
             .col-md-6
               .form-group.bmd-form-group
                 label.bmd-label-floating Email address
-                input.form-control(type='email', name='email')
+                input.form-control(type='email', name='email', value='dhf@f.com')
           .row.mt-3
             .col-md-12
               label Address
               .form-group.bmd-form-group
                 label.bmd-label-floating  Enter Your Full address seprated by comma ( city, town, etc)
-                textarea.form-control(rows='3', name='address')
+                textarea.form-control(rows='3', name='address') Okay this is Testing 
           .row.mt-3
             .col-md-4
               .form-group.bmd-form-group
                 label.bmd-label-floating mobile
-                input.form-control(type='number', name='mobile', min='2'  )
+                input.form-control(type='number', name='mobile', min='2' value='123456789' )
             .col-md-4
               .form-group.bmd-form-group
                 label.bmd-label-floating enrollment_no
-                input.form-control(type='number', name='enrollment_no')
+                input.form-control(type='number', name='enrollment_no' value='834')
             .col-md-4
               .form-group.bmd-form-group
                 label.bmd-label-floating Birthdate
-                input.form-control(type='Date' name='dob'  )
+                input.form-control(type='Date' name='dob' )
           .row.mt-5
             .col-3
               .form-group.bmd-form-group
                 label.bmd-label-floating RollNo
-                input.form-control(type='number', name='roll_no', required )
+                input.form-control(type='number', name='roll_no', value='234', required )
             .col-3
               .custom-file
-                input#profile_pic.custom-file-input(type='file', name='profile_pic', accept="image/*", multiple)
+                input#profile_pic.custom-file-input(type='file', name='profile_pic', accept="image/*", onchange="Checkfiles()", multiple)
                 label.custom-file-label(for='profile_pic') ProfoliPic
-            .col-3
-          input.form-control(type='submit')
+          button.form-control(type='submit' )

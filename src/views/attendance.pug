@@ -41,7 +41,7 @@ block content-fluid
             // Table head
             thead
               tr
-                th.th-lg(width='2%')
+                th.th-lg(width='2%').d-none
                   a  Temp
                 th.th-lg(width='4%')
                   a  Sr
@@ -55,7 +55,7 @@ block content-fluid
                   a  Actions
             each stud,i in students
               tr(class='row_present_absent row_present')
-                td#present_absent_handler
+                td#present_absent_handler.d-none
                   input.radio_btn(type='radio', name='student_id='+ stud.id, value='1', checked)
                   input.radio_btn(type='radio', name='student_id='+ stud.id, value='0',)
                 td.sr=i+1
