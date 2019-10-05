@@ -1,0 +1,65 @@
+ D:.
+│   .env
+│   .eslintrc.json
+│   .gitignore
+│   ormconfig.json
+│   package-lock.json
+│   package.json
+│   tsconfig.json
+│
+├───public
+└───src
+    │   index.ts
+    │   indexHttps.ts
+    │
+    ├───controllers
+    │       attendanceController.ts
+    │       authController.ts
+    │       dashboardController.ts
+    │       studentController.ts
+    │       teacherController.ts
+    │       utilController.ts
+    │
+    ├───entity
+    │       Attendance.ts
+    │       Student.ts
+    │       Teacher.ts
+    │
+    ├───fixtures
+    │       students.csv
+    │       teachers.csv
+    │
+    ├───middlewares
+    │       checkJwt.ts
+    │       checkRoll.ts
+    │
+    ├───repos
+    │       teacherRepository.ts
+    │
+    ├───routes
+    │       attendanceRoutes.ts
+    │       dashboardRoutes.ts
+    │       indexRoutes.ts
+    │       studentRoutes.ts
+    │       teacherRoutes.ts
+    └───views
+        │   attendance.pug
+        │   dashboard.pug
+        │   face.pug
+        │   index.pug
+        │   student_registration.pug
+        │   teacher_login.pug
+        │   teacher_registration.pug
+        │   _layout.pug
+        │
+        ├───errors
+        │       404.pug
+        │
+        └───layout
+                footer.pug
+                footer_scripts.pug
+                head.pug
+                sidebar.pug
+                topnav_bar.pug
+                variables.pug
+

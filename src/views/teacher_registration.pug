@@ -11,10 +11,10 @@ block append footer
   script(src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js')
   script.
     $("input[name='teacher_id']").val(getCookie('teacher_id'))
-    jQuery.validator.setDefaults({
-      debug: true,
-      success: "valid"
-    });
+    //- jQuery.validator.setDefaults({
+    //-   debug: true,
+    //-   success: "valid"
+    //- });
     $( "#teacher_registration_form" ).validate({
       rules: {
         'username':{
@@ -92,4 +92,5 @@ block content-fluid
                 input.form-control(type='text',name='roll' placeholder='Admin | principle | Teacher')
           .row
             .col-md-9
-              button.btn.btn-fill.btn-rose.pull-right(type='submit') Create
+              //- button.btn.btn-fill.btn-rose.pull-right(type='submit') Create
+              button.form-control(type='submit' ) Submit
