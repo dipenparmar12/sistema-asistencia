@@ -40,63 +40,11 @@ class MyApplication {
 
   constructor() {
     this.appMiddlewares();
-    this.devRoutes();
     this.appRoutes();
     this.conn();
     this._express.listen(this.port, () => {
       console.log(process.env.APP_NAME + ', Started At:' + this.port);
     });
-    this.test();
-  }
-
-  public async insertFakeData(
-    isStudentInsert: boolean = true,
-    studentCount: number = 3
-  ) {
-    console.log(' insertFakeData() Method');
-
-    let teachers: any = await utilController
-      .getCsvData('teachers.csv')
-      .then(data => data);
-    let students: any = await utilController
-      .getCsvData('students.csv')
-      .then(data => data);
-    // console.log(teachers[1])
-
-    const con = getConnection();
-    let teacherRepository = getRepository(Teacher);
-    let studentRepository = getRepository(Student);
-
-    teachers.forEach(async teacher => {
-      let t = await teacherRepository.save(teacher).catch(e => {
-        // console.log(e);
-      });
-
-      if (isStudentInsert) {
-        let counter: number = 0;
-        students.forEach(async stud => {
-          counter += 1;
-          if (counter < studentCount) {
-            stud.name = null;
-            stud.enrollment_no = null;
-            stud.teacherid = null;
-
-            stud.name = 'A-' + Math.floor(Math.random() * (10000000 - 1) + 1);
-            stud.enrollment_no = Math.floor(Math.random() * (10000000 - 1) + 1);
-            stud.teacher = t;
-
-            // console.log(stud);
-            let s = await studentRepository.save(stud).catch(e => {
-              console.log(e);
-            });
-          }
-        });
-      }
-    });
-
-    // console.log(await teacherRepository.find())
-    // let myTeacher = await con.manager.find(Teacher)
-    // console.log(myTeacher)
   }
 
   /**
@@ -133,7 +81,6 @@ class MyApplication {
    * ERROR AND Undefined Routes
    */
   private errorRoutes() {
-    ////.... IF Request Route not Found.. THRO ERROR
     this._express.use((req, res, next) => {
       res.status(404).render('errors/404.pug', { url: req.url });
     });
@@ -155,27 +102,8 @@ class MyApplication {
       entities: [Teacher, Student, Attendance],
       synchronize: true
     });
-
-    // const tRepo = getRepository(Teacher);
-    // const teachers = await tRepo.find();
-    // console.log(teachers);
   }
 
-  /**
-   * Only Dev Routes for Testing and Creating Record without Login etc
-   */
-  public async devRoutes() {
-    if (process.env.NODE_ENV === 'dev') {
-      this._express.post('/api/teachers', teacherController.create);
-    }
-    // await getRepository('teacher').save([...itemList], { chunk: 500 })
-  }
-
-  public async test() {
-    // let uploadDir = './public/uploads/777/';
-    // let files = utilController.getFilesFromPath(uploadDir);
-    // console.log(files);
-  }
 }
 
 let app = new MyApplication();

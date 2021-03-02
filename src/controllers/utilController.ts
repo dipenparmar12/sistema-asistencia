@@ -41,7 +41,9 @@ const upload = multer({
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'), null);
+			// return cb(new Error('Only .png, .jpg and .jpeg format allowed!'), null);
+			console.log("utileCOntoller.ts error");
+			return 
     }
   }
 }).array('profile_pic', 5);
