@@ -25,7 +25,7 @@
     "class-validator": "^0.10.2",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "fast-csv": "^3.7.0",
     "helmet": "^3.23.3",
     "jsonwebtoken": "^8.5.1",
